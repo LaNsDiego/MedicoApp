@@ -5,16 +5,29 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_reserva_listar_aside"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Listar Reserva" />
+            android:id="@+id/perfilMFragment"
+            android:icon="@drawable/ic_person_outline_black_24dp"
+            android:title="Datos de Perfil" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
-<!--        <item-->
-<!--            android:id="@+id/nav_slideshow"-->
-<!--            android:icon="@drawable/ic_menu_slideshow"-->
-<!--            android:title="@string/menu_slideshow" />-->
+            android:id="@+id/cambiarContrasenaMFragment"
+            android:icon="@drawable/ic_vpn_key_black_24dp"
+            android:title="Cambiar Contraseña" />
+
+        <item
+            android:id="@+id/consultorioMFragment"
+            android:icon="@drawable/ic_business_black_24dp"
+            android:title="Datos de Consultorio" />
+
+        <item
+            android:id="@+id/atencionMFragment"
+            android:icon="@drawable/ic_date_range_black_24dp"
+            android:title="Horario de Atención" />
+
+        <item
+            android:id="@+id/reservaMFragment"
+            android:icon="@drawable/ic_feedback_black_24dp"
+            android:label="Reservas Pendientes"
+            android:title="Reservas Pendientes" />
+
     </group>
 </menu>

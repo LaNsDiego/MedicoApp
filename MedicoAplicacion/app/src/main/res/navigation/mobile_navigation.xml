@@ -8,17 +8,14 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.example.medicoaplicacion.ui.home.HomeFragment"
-        android:label="Reserva Listar"
+        android:label="Home"
         tools:layout="@layout/fragment_home">
 
-        <action
-            android:id="@+id/action_HomeFragment_to_HomeSecondFragment"
-            app:destination="@id/nav_gallery" />
     </fragment>
     <fragment
-        android:id="@+id/nav_reserva_listar"
+        android:id="@+id/reservaMFragment"
         android:name="com.example.medicoaplicacion.vista.reserva.ReservaMFragment"
-        android:label="@string/home_second"
+        android:label="Reservas Pendientes"
         tools:layout="@layout/fragment_reserva_m">
 
         <argument
@@ -27,14 +24,19 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.medicoaplicacion.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
+        android:id="@+id/atencionMFragment"
+        android:name="com.example.medicoaplicacion.vista.atencion.AtencionMFragment"
+        android:label="Horario de Atención" />
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.medicoaplicacion.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/cambiarContrasenaMFragment"
+        android:name="com.example.medicoaplicacion.vista.perfil.CambiarContrasenaMFragment"
+        android:label="Cambiar Contraseña" />
+    <fragment
+        android:id="@+id/consultorioMFragment"
+        android:name="com.example.medicoaplicacion.vista.consultorio.ConsultorioMFragment"
+        android:label="Datos de Consultorio" />
+    <fragment
+        android:id="@+id/perfilMFragment"
+        android:name="com.example.medicoaplicacion.vista.perfil.PerfilMFragment"
+        android:label="Datos de Perfil" />
 </navigation>

@@ -93,7 +93,7 @@ public class ReservaModelo implements ReservaMInterface.Modelo {
         ReservaModelo reservaModelo4 = new ReservaModelo();
         reservaModelo1.setIdReserva("Yonathan William, Mamani Calisaya");
         reservaModelo2.setIdReserva("Juan Luis, Torres Herrera");
-        reservaModelo2.setIdReserva("Rosa Ericka, Perez Jarro");
+        reservaModelo3.setIdReserva("Rosa Ericka, Perez Jarro");
         reservaModelo4.setIdReserva("Teresa Martha, Gonzales Pinto");
         List<ReservaModelo> lista = new ArrayList<>();
 
