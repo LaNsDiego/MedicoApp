@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "969232536888",
+    "firebase_url": "https://portafoliomedico-92ee5.firebaseio.com",
+    "project_id": "portafoliomedico-92ee5",
+    "storage_bucket": "portafoliomedico-92ee5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969232536888:android:43d50f5a46422581e75dcd",
+        "android_client_info": {
+          "package_name": "com.example.medicoaplicacion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "969232536888-fr6osude3hldomdgt3j5a2v39v06ganh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWFAi8z3FRWDvjb94Wvu5Gyd3NAKFoSBo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "969232536888-fr6osude3hldomdgt3j5a2v39v06ganh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969232536888:android:c28300fbb167e606e75dcd",
+        "android_client_info": {
+          "package_name": "com.example.portafoliomedicoapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "969232536888-fr6osude3hldomdgt3j5a2v39v06ganh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWFAi8z3FRWDvjb94Wvu5Gyd3NAKFoSBo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "969232536888-fr6osude3hldomdgt3j5a2v39v06ganh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

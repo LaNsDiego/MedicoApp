@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">MedicoAplicacion</string>
+    <string name="title_activity_principal">PrincipalActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <!-- MENU MEDICO -->
+    <string name="menu_perfil">Perfil</string>
+    <string name="menu_cambiar_contrasena">Cambiar Contraseña</string>
+    <string name="menu_consultorio">Consultorio</string>
+    <string name="menu_atencion">Horario de Atención</string>
+    <string name="menu_reserva">Horario de Reserva</string>
+
+    <string name="home_second">Home Second</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lorem_heraldo">Hay golpes en la vida, tan fuertes… ¡Yo no sé! Golpes como del odio de Dios; como si ante ellos, la resaca de todo lo sufrido se empozara en el alma… ¡Yo no sé!  Son pocos; pero son… Abren zanjas oscuras en el rostro más fiero y en el lomo más fuerte. Serán tal vez los potros de bárbaros Atilas; o los heraldos negros que nos manda la Muerte.</string>
+    <string name="next_or_prev">next</string>
+    <string name="get_started">reservar cita</string>
+    <string name="next">continuar</string>
+    <string name="title_activity_principal_medico">PrincipalMedicoActivity</string>
+</resources>
