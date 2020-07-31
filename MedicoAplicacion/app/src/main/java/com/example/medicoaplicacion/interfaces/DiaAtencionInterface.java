@@ -27,7 +27,7 @@ public interface DiaAtencionInterface {
     }
 
     interface RowListener {
-        void onClickDiaAtencionRow();//clic en la fila
+        void onClickDiaAtencionRow(String idDiaAtencion);//clic en la fila
 
     }
 }

@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.medicoaplicacion.R;
+import com.example.medicoaplicacion.VerReservaFragment;
 import com.example.medicoaplicacion.interfaces.DiaAtencionInterface;
 import com.example.medicoaplicacion.modelo.DiasAtencionModelo;
 import com.example.medicoaplicacion.presentador.diaatencion.DiaAtencionAdapter;
@@ -74,7 +76,7 @@ public class AtencionMFragment extends Fragment implements DiaAtencionInterface.
     @Override
     public void manejadorListaDiasAtencionExitoso(List<DiasAtencionModelo> list) {
 
-        DiaAtencionAdapter reservaMAdaptador = new DiaAtencionAdapter(R.layout.component_row_dias_antencion,list);
+        DiaAtencionAdapter reservaMAdaptador = new DiaAtencionAdapter(R.layout.component_row_dias_antencion,list , this);
         LinearLayoutManager llms = new LinearLayoutManager(getContext());
         llms.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewReserva.setLayoutManager(llms);
@@ -82,7 +84,7 @@ public class AtencionMFragment extends Fragment implements DiaAtencionInterface.
     }
 
     @Override
-    public void onClickDiaAtencionRow() {
-
+    public void onClickDiaAtencionRow(String idDiaAtencion) {
+        Toast.makeText(getContext(), "click en una fila", Toast.LENGTH_SHORT).show();
     }
 }

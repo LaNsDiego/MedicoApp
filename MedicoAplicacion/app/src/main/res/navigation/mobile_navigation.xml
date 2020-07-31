@@ -39,4 +39,10 @@
         android:id="@+id/perfilMFragment"
         android:name="com.example.medicoaplicacion.vista.perfil.PerfilMFragment"
         android:label="Datos de Perfil" />
+
+<!--    verReserva Fragment-->
+    <fragment
+        android:id="@+id/verReservaMFragment"
+        android:name="com.example.medicoaplicacion.VerReservaFragment"
+        android:label="VER RESERVA FARGMENT" />
 </navigation>

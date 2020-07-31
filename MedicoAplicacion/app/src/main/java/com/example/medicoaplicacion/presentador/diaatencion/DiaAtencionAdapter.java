@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.medicoaplicacion.interfaces.DiaAtencionInterface;
 import com.example.medicoaplicacion.modelo.DiasAtencionModelo;
 
 import java.util.List;
@@ -15,10 +16,11 @@ public class DiaAtencionAdapter extends RecyclerView.Adapter<DiaAtencionHolder>{
 
     private int resourceLayout;
     private List<DiasAtencionModelo> listaDiaAtencionModelo;
-
-    public DiaAtencionAdapter(int resourceLayout, List<DiasAtencionModelo> listaDiaAtencionModelo) {
+    DiaAtencionInterface.RowListener eventosClick;
+    public DiaAtencionAdapter(int resourceLayout, List<DiasAtencionModelo> listaDiaAtencionModelo , DiaAtencionInterface.RowListener eventosClick ) {
         this.resourceLayout = resourceLayout;
         this.listaDiaAtencionModelo = listaDiaAtencionModelo;
+        this.eventosClick = eventosClick;
     }
 
     @NonNull
@@ -30,10 +32,14 @@ public class DiaAtencionAdapter extends RecyclerView.Adapter<DiaAtencionHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull DiaAtencionHolder holder, int position) {
-
-        DiasAtencionModelo diasAtencionModelo = listaDiaAtencionModelo.get(position);
+        final DiasAtencionModelo diasAtencionModelo = listaDiaAtencionModelo.get(position);
         holder.tvDiaAtencion.setText(diasAtencionModelo.getNombreDia());
-        //holder.materialCardView.setOnClickListener();
+        holder.materialCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eventosClick.onClickDiaAtencionRow(diasAtencionModelo.getIdDiaAtencion());
+            }
+        });
 
     }
 
