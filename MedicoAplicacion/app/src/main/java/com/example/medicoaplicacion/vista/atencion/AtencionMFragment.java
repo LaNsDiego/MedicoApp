@@ -25,7 +25,7 @@ import java.util.List;
  * Use the {@link AtencionMFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AtencionMFragment extends Fragment implements DiaAtencionInterface.VistaList {
+public class AtencionMFragment extends Fragment implements DiaAtencionInterface.VistaList, DiaAtencionInterface.RowListener {
 
     private RecyclerView recyclerViewReserva;
     private RecyclerView.Adapter mAdapter;
@@ -38,15 +38,6 @@ public class AtencionMFragment extends Fragment implements DiaAtencionInterface.
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AtencionMFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static AtencionMFragment newInstance(String param1, String param2) {
         AtencionMFragment fragment = new AtencionMFragment();
         Bundle args = new Bundle();
@@ -88,5 +79,10 @@ public class AtencionMFragment extends Fragment implements DiaAtencionInterface.
         llms.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewReserva.setLayoutManager(llms);
         recyclerViewReserva.setAdapter(reservaMAdaptador);
+    }
+
+    @Override
+    public void onClickDiaAtencionRow() {
+
     }
 }

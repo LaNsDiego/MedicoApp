@@ -11,12 +11,13 @@ public class DiaAtencionPresentador implements DiaAtencionInterface.Presentador 
     DiaAtencionInterface.VistaList vistaList;
 
     public DiaAtencionPresentador(DiaAtencionInterface.VistaList vistaList) {
+        diaAtencionModelo = new DiasAtencionModelo(this);
         this.vistaList = vistaList;
     }
 
     @Override
     public void ejecutarListarDiasAtencion() {
-        diaAtencionModelo.listarDiasAtencion("ddd1");
+        diaAtencionModelo.listarDiasAtencion();
 
     }
 

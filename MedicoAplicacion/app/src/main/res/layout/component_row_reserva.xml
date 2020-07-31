@@ -11,30 +11,39 @@
         android:id="@+id/card_container_reserva_row"
         android:padding="8dp"
         app:cardElevation="0dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:checkable="true"
         app:strokeWidth="1dp"
-        app:strokeColor="#BDBDBD"
-        app:cardBackgroundColor="#FAFAFA"
+        app:strokeColor="#FFFFFF"
+        app:cardBackgroundColor="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:paddingTop="4dp"
-            android:paddingBottom="4dp"
 
-            android:orientation="horizontal">
-            <ImageView
+            android:paddingBottom="4dp">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/img_profile_paciente_row"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center_vertical"
-                android:layout_width="?android:attr/listPreferredItemHeight"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher_round" />
+                android:src="@mipmap/ic_launcher_round"
+                app:civ_border_color="#03A9F4"
+                app:civ_border_width="2dp" />
+
             <LinearLayout
-                android:layout_gravity="center_vertical"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:orientation="vertical">
 
                 <TextView
@@ -42,28 +51,51 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:breakStrategy="simple"
-                    android:textColor="#212121"
-                    android:text="Yonathan William Mamani Calisaya"
-                    android:textStyle="bold"
+                    android:text="Yonathan William"
                     android:textAppearance="?android:attr/textAppearanceListItem"
-                    />
+                    android:textColor="#212121"
+                    android:textStyle="bold" />
 
 
-                <TextView android:id="@+id/specialty_doctor_row"
+                <TextView
+                    android:id="@+id/specialty_doctor_row"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Lunes 20 de agosto del 2020"
-                    android:textColor="#757575"
                     android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                    android:textColor="#757575"
 
                     />
-                <TextView android:id="@+id/price_doctor_row"
+
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/price_doctor_rowd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="10:00 - 10:30"
+                    android:layout_gravity="center"
+                    android:text="10:00"
+                    android:textAlignment="center"
                     android:textAppearance="?android:attr/textAppearanceListItemSmall"
                     android:textColor="#757575"
-                    />
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/price_doctor_rDDowd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="PM"
+                    android:textAlignment="center"
+                    android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                    android:textColor="#212121" />
 
             </LinearLayout>
         </LinearLayout>

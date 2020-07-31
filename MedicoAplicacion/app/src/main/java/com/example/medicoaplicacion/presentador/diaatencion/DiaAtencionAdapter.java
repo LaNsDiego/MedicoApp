@@ -33,7 +33,7 @@ public class DiaAtencionAdapter extends RecyclerView.Adapter<DiaAtencionHolder>{
 
         DiasAtencionModelo diasAtencionModelo = listaDiaAtencionModelo.get(position);
         holder.tvDiaAtencion.setText(diasAtencionModelo.getNombreDia());
-
+        //holder.materialCardView.setOnClickListener();
 
     }
 

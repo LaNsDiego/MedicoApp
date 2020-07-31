@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".vista.medico.perfil.PerfilMFragment">
+    tools:context=".vista.perfil.PerfilMFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <ScrollView
@@ -16,6 +16,8 @@
             android:orientation="vertical"
             android:padding="15dp"
             >
+
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tfTipoDocumento"
                 android:layout_width="match_parent"

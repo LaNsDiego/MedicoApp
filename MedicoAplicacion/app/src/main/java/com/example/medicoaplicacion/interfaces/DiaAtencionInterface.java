@@ -22,7 +22,12 @@ public interface DiaAtencionInterface {
     }
 
     interface Modelo{
-        void listarDiasAtencion(String idMedico);  /// 3
+        void listarDiasAtencion();  /// 3
+
+    }
+
+    interface RowListener {
+        void onClickDiaAtencionRow();//clic en la fila
 
     }
 }

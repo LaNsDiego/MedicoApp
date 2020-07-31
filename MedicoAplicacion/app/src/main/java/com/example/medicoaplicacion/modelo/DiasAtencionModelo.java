@@ -56,7 +56,7 @@ public class DiasAtencionModelo implements DiaAtencionInterface.Modelo {
 
 
     @Override
-    public void listarDiasAtencion(String idMedico) {
+    public void listarDiasAtencion() {
 
         DiasAtencionModelo obj1 = new DiasAtencionModelo();
         DiasAtencionModelo obj2 = new DiasAtencionModelo();
@@ -73,7 +73,7 @@ public class DiasAtencionModelo implements DiaAtencionInterface.Modelo {
         obj5.setNombreDia("Viernes");
         obj6.setNombreDia("Sabado");
 
-        obj1.setIdDiaAtencion(idMedico);
+
 
         lista.add(obj1);
         lista.add(obj2);
