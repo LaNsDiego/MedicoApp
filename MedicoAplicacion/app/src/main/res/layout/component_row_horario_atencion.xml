@@ -9,7 +9,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_container_reserva_row"
+        android:id="@+id/card_container_horarioatencion_row"
         android:padding="8dp"
         app:cardElevation="0dp"
         app:strokeWidth="1dp"

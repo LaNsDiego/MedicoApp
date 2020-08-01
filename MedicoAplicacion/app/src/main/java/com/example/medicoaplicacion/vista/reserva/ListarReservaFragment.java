@@ -3,6 +3,7 @@ package com.example.medicoaplicacion.vista.reserva;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,10 +23,10 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ReservaMFragment#newInstance} factory method to
+ * Use the {@link ListarReservaFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ReservaMFragment extends Fragment implements ReservaMInterface.VistaList {
+public class ListarReservaFragment extends Fragment implements ReservaMInterface.VistaList, ReservaMInterface.RowListener {
 
     private RecyclerView recyclerViewReserva;
     private RecyclerView.Adapter mAdapter;
@@ -34,13 +35,13 @@ public class ReservaMFragment extends Fragment implements ReservaMInterface.Vist
     ReservaMInterface.Presentador presentador;
 
 
-    public ReservaMFragment() {
+    public ListarReservaFragment() {
         // Required empty public constructor
     }
 
 
-    public static ReservaMFragment newInstance(String param1, String param2) {
-        ReservaMFragment fragment = new ReservaMFragment();
+    public static ListarReservaFragment newInstance(String param1, String param2) {
+        ListarReservaFragment fragment = new ListarReservaFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -56,7 +57,7 @@ public class ReservaMFragment extends Fragment implements ReservaMInterface.Vist
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View vista = inflater.inflate(R.layout.fragment_reserva_m, container, false);
+        View vista = inflater.inflate(R.layout.fragment_listar_reserva, container, false);
 
         presentador = new ReservaMPresentador(this);
 
@@ -77,11 +78,21 @@ public class ReservaMFragment extends Fragment implements ReservaMInterface.Vist
     @Override
     public void manejadorListaReservaExitoso(List<ReservaModelo> list) {
 
-        ReservaMAdaptador reservaMAdaptador = new ReservaMAdaptador(R.layout.component_row_reserva,list);
+        ReservaMAdaptador reservaMAdaptador = new ReservaMAdaptador(R.layout.component_row_reserva,list,this);
         LinearLayoutManager llms = new LinearLayoutManager(getContext());
         llms.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewReserva.setLayoutManager(llms);
         recyclerViewReserva.setAdapter(reservaMAdaptador);
 
+    }
+
+
+    @Override
+    public void onClickVerReservaRow(String idReserva) {
+        VerReservaFragment nuevoFragmento = new VerReservaFragment();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.container_ver_reserva, nuevoFragmento);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

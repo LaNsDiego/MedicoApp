@@ -4,13 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F4F4F4"
-    tools:context=".vista.atencion.AtencionMFragment">
+    tools:context=".vista.diaatencion.ListarDiaAtencionFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:id="@+id/rv_diaatencion"
 
         android:scrollbars="vertical"
+        android:layout_height="match_parent"/>
+
+    <FrameLayout
+        android:id="@+id/container_ver_atencion"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
 </FrameLayout>

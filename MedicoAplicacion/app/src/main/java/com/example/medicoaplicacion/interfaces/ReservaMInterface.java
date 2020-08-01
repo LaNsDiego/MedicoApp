@@ -24,4 +24,8 @@ public interface ReservaMInterface {
         void listarReserva();  /// 3
 
     }
+
+    interface RowListener {
+        void onClickVerReservaRow(String idReserva);//clic en la fila
+    }
 }

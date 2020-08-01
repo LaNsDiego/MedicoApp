@@ -5,13 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F4F4F4"
-    tools:context=".vista.reserva.ReservaMFragment">
+    tools:context=".vista.reserva.ListarReservaFragment">
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:id="@+id/rv_reservas"
         android:scrollbars="vertical"
+        android:layout_height="match_parent"/>
+
+    <FrameLayout
+        android:id="@+id/container_ver_reserva"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
 </FrameLayout>

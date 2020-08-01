@@ -14,9 +14,9 @@
     </fragment>
     <fragment
         android:id="@+id/reservaMFragment"
-        android:name="com.example.medicoaplicacion.vista.reserva.ReservaMFragment"
+        android:name="com.example.medicoaplicacion.vista.reserva.ListarReservaFragment"
         android:label="Reservas Pendientes"
-        tools:layout="@layout/fragment_reserva_m">
+        tools:layout="@layout/fragment_listar_reserva">
 
         <argument
             android:name="myArg"
@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/atencionMFragment"
-        android:name="com.example.medicoaplicacion.vista.atencion.AtencionMFragment"
+        android:name="com.example.medicoaplicacion.vista.diaatencion.ListarDiaAtencionFragment"
         android:label="Horario de Atención" />
     <fragment
         android:id="@+id/cambiarContrasenaMFragment"
@@ -43,6 +43,6 @@
 <!--    verReserva Fragment-->
     <fragment
         android:id="@+id/verReservaMFragment"
-        android:name="com.example.medicoaplicacion.VerReservaFragment"
+        android:name="com.example.medicoaplicacion.vista.reserva.VerReservaFragment"
         android:label="VER RESERVA FARGMENT" />
 </navigation>

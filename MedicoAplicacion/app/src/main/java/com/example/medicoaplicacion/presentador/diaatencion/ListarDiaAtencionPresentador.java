@@ -1,17 +1,17 @@
 package com.example.medicoaplicacion.presentador.diaatencion;
 
 import com.example.medicoaplicacion.interfaces.DiaAtencionInterface;
-import com.example.medicoaplicacion.modelo.DiasAtencionModelo;
+import com.example.medicoaplicacion.modelo.DiaAtencionModelo;
 
 import java.util.List;
 
-public class DiaAtencionPresentador implements DiaAtencionInterface.Presentador {
+public class ListarDiaAtencionPresentador implements DiaAtencionInterface.Presentador {
 
     DiaAtencionInterface.Modelo diaAtencionModelo;
     DiaAtencionInterface.VistaList vistaList;
 
-    public DiaAtencionPresentador(DiaAtencionInterface.VistaList vistaList) {
-        diaAtencionModelo = new DiasAtencionModelo(this);
+    public ListarDiaAtencionPresentador(DiaAtencionInterface.VistaList vistaList) {
+        diaAtencionModelo = new DiaAtencionModelo(this);
         this.vistaList = vistaList;
     }
 
@@ -22,7 +22,7 @@ public class DiaAtencionPresentador implements DiaAtencionInterface.Presentador 
     }
 
     @Override
-    public void cuandoListaDiasAtencionExitoso(List<DiasAtencionModelo> list) {
+    public void cuandoListaDiasAtencionExitoso(List<DiaAtencionModelo> list) {
         vistaList.manejadorListaDiasAtencionExitoso(list);
     }
 

@@ -5,7 +5,7 @@ import com.example.medicoaplicacion.interfaces.DiaAtencionInterface;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DiasAtencionModelo implements DiaAtencionInterface.Modelo {
+public class DiaAtencionModelo implements DiaAtencionInterface.Modelo {
 
     private String idDiaAtencion;
     private String nombreDia;
@@ -14,11 +14,11 @@ public class DiasAtencionModelo implements DiaAtencionInterface.Modelo {
 
     DiaAtencionInterface.Presentador diaAtencionPresentador;
 
-    public DiasAtencionModelo(DiaAtencionInterface.Presentador diaAtencionPresentador) {
+    public DiaAtencionModelo(DiaAtencionInterface.Presentador diaAtencionPresentador) {
         this.diaAtencionPresentador = diaAtencionPresentador;
     }
 
-    public DiasAtencionModelo() {
+    public DiaAtencionModelo() {
 
     }
 
@@ -58,14 +58,14 @@ public class DiasAtencionModelo implements DiaAtencionInterface.Modelo {
     @Override
     public void listarDiasAtencion() {
 
-        DiasAtencionModelo obj1 = new DiasAtencionModelo();
-        DiasAtencionModelo obj2 = new DiasAtencionModelo();
-        DiasAtencionModelo obj3 = new DiasAtencionModelo();
-        DiasAtencionModelo obj4 = new DiasAtencionModelo();
-        DiasAtencionModelo obj5 = new DiasAtencionModelo();
-        DiasAtencionModelo obj6 = new DiasAtencionModelo();
+        DiaAtencionModelo obj1 = new DiaAtencionModelo();
+        DiaAtencionModelo obj2 = new DiaAtencionModelo();
+        DiaAtencionModelo obj3 = new DiaAtencionModelo();
+        DiaAtencionModelo obj4 = new DiaAtencionModelo();
+        DiaAtencionModelo obj5 = new DiaAtencionModelo();
+        DiaAtencionModelo obj6 = new DiaAtencionModelo();
 
-        List<DiasAtencionModelo> lista = new ArrayList<>();
+        List<DiaAtencionModelo> lista = new ArrayList<>();
         obj1.setNombreDia("Lunes");
         obj2.setNombreDia("Martes");
         obj3.setNombreDia("Miercoles");
