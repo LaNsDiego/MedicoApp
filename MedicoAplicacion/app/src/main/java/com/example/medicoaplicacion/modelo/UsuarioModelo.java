@@ -1,5 +1,7 @@
 package com.example.medicoaplicacion.modelo;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.medicoaplicacion.interfaces.UsuarioInterface;
@@ -278,23 +280,31 @@ public class UsuarioModelo implements UsuarioInterface.Modelo, PerfilInterface.M
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 final FirebaseUser currentUser =  auth.getCurrentUser();
-                Conexion.getCollectionUsuario().document(currentUser.getUid()).get()
-                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                            @Override
-                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                if(documentSnapshot.exists()){
-                                    final UsuarioModelo usuarioLogueado = documentSnapshot.toObject(UsuarioModelo.class);
-                                    presentador.cuandoInicioSesionExitoso(usuarioLogueado);
-                                }else{
-                                    presentador.cuandoInicioSesionFallido();
+//                Log.d("LOGIN",currentUser.getUid().toString());
+                if(currentUser != null){
+                    Conexion.getCollectionUsuario().document(currentUser.getUid()).get()
+                            .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                @Override
+                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                    if(documentSnapshot.exists()){
+                                        final UsuarioModelo usuarioLogueado = documentSnapshot.toObject(UsuarioModelo.class);
+                                        if(usuarioLogueado != null){
+                                            presentador.cuandoInicioSesionExitoso(usuarioLogueado);
+                                        }
+
+                                    }else{
+                                        presentador.cuandoInicioSesionFallido();
+                                    }
                                 }
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        presentador.cuandoInicioSesionFallido();
-                    }
-                });
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            presentador.cuandoInicioSesionFallido();
+                        }
+                    });
+                }else{
+                    presentador.cuandoInicioSesionFallido();
+                }
             }
         });
     }
