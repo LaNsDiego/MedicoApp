@@ -62,7 +62,7 @@
                      />
 
                 <TextView
-                    android:id="@+id/price_doctor_rowd"
+                    android:id="@+id/hora_atencion_row"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="10:00"
@@ -84,7 +84,7 @@
 
 
                 <TextView
-                    android:id="@+id/specialty_doctor_row"
+                    android:id="@+id/fecha_Atencion_row"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Lunes 20 de agosto del 2020"
@@ -94,7 +94,7 @@
                     android:textColor="#757575"/>
 
                 <TextView
-                    android:id="@+id/price_doctor_rDDowd"
+                    android:id="@+id/turno_atencion_row"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

@@ -7,15 +7,14 @@ import java.util.List;
 public interface ReservaMInterface {
     interface VistaList{
         void menejadorListarReserva(); ///1
-
         void manejadorListaReservaExitoso(List<ReservaModelo> list); //5.1
     }
+
 
     interface Presentador{
         void ejecutarListarReserva(); /// general el arraylist  2
         void cuandoListaReservaExitoso(List<ReservaModelo> list); // 4.1
         void cuandoListaReservaFallido(); // // 4.1
-
 
 
     }
@@ -28,4 +27,5 @@ public interface ReservaMInterface {
     interface RowListener {
         void onClickVerReservaRow(String idReserva);//clic en la fila
     }
+
 }

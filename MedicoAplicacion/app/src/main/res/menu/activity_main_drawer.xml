@@ -26,8 +26,8 @@
         <item
             android:id="@+id/reservaMFragment"
             android:icon="@drawable/ic_feedback_black_24dp"
-            android:label="Reservas Pendientes"
-            android:title="Reservas Pendientes" />
+            android:label="Historial Reservas"
+            android:title="Historial Reservas" />
 
     </group>
 </menu>

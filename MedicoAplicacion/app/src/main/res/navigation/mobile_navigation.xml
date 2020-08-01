@@ -7,15 +7,15 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.medicoaplicacion.ui.home.HomeFragment"
-        android:label="Home"
+        android:name="com.example.medicoaplicacion.vista.Inicio.InicioFragment"
+        android:label="Inicio"
         tools:layout="@layout/fragment_home">
 
     </fragment>
     <fragment
         android:id="@+id/reservaMFragment"
         android:name="com.example.medicoaplicacion.vista.reserva.ListarReservaFragment"
-        android:label="Reservas Pendientes"
+        android:label="Historial de Reservas"
         tools:layout="@layout/fragment_listar_reserva">
 
         <argument
@@ -44,5 +44,5 @@
     <fragment
         android:id="@+id/verReservaMFragment"
         android:name="com.example.medicoaplicacion.vista.reserva.VerReservaFragment"
-        android:label="VER RESERVA FARGMENT" />
+        android:label="Datos de  Rserva" />
 </navigation>

@@ -273,6 +273,7 @@ public class UsuarioModelo implements UsuarioInterface.Modelo, PerfilInterface.M
 
     @Override
     public void iniciarSesion(String usuario , String clave) {
+
         auth.signInWithEmailAndPassword(usuario, clave).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

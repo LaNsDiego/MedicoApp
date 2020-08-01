@@ -1,40 +1,42 @@
-package com.example.medicoaplicacion.presentador.reserva;
+package com.example.medicoaplicacion.presentador.Home;
 
+import android.view.ViewGroup;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.medicoaplicacion.interfaces.ReservaMInterface;
+import com.example.medicoaplicacion.interfaces.HomeInterface;
 import com.example.medicoaplicacion.modelo.ReservaModelo;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class ReservaMAdaptador extends RecyclerView.Adapter<ReservaMHolder> {
+public class HomeAdapter  extends RecyclerView.Adapter<HomeHolder>{
+
     private int resourceLayout;
     private List<ReservaModelo> listaReservaModelo;
-    ReservaMInterface.RowListener eventosClick;
-    //ENVIAR EL compoment ROW Y EL ARRAYLIST
-    public ReservaMAdaptador(int resourceLayout, List<ReservaModelo> listaReservaModelo, ReservaMInterface.RowListener eventosClick) {
+    HomeInterface.RowListener eventosClick;
+
+    public HomeAdapter(int resourceLayout, List<ReservaModelo> listaReservaModelo, HomeInterface.RowListener eventosClick) {
         this.resourceLayout = resourceLayout;
         this.listaReservaModelo = listaReservaModelo;
         this.eventosClick = eventosClick;
     }
 
+
     @NonNull
     @Override
-    public ReservaMHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ///ENLAZAS EN COMPONENT ROT EN EL HOLDER
+    public HomeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View view = LayoutInflater.from(parent.getContext()).inflate(resourceLayout,parent,false);
-        return new ReservaMHolder(view);
+        return new HomeHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ReservaMHolder holder, int position) {
-            //SETEAR DATOS DEL XML
+    public void onBindViewHolder(@NonNull HomeHolder holder, int position) {
         final ReservaModelo reservaModelo = listaReservaModelo.get(position);
 
 
@@ -48,10 +50,9 @@ public class ReservaMAdaptador extends RecyclerView.Adapter<ReservaMHolder> {
         holder.cvContainerReserva.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                eventosClick.onClickVerReservaRow(reservaModelo.getIdReserva());
+                eventosClick.onClickHomeVerReservaRow(reservaModelo.getIdReserva());
             }
         });
-
     }
 
     @Override
@@ -59,4 +60,3 @@ public class ReservaMAdaptador extends RecyclerView.Adapter<ReservaMHolder> {
         return listaReservaModelo.size();
     }
 }
-

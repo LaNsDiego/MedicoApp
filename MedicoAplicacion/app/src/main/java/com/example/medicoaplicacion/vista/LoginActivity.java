@@ -99,12 +99,10 @@ public class LoginActivity extends AppCompatActivity implements UsuarioInterface
     @Override
     public void manejadorInicioSesionExitoso(UsuarioModelo usuarioLogueado) {
         Toast.makeText(this, "Bienvenido al sistema " + usuarioLogueado.getTipoUsuario(), Toast.LENGTH_SHORT).show();
-//        goToActivityPrincipalMedico();
-        //if(usuarioLogueado.getTipoUsuario().equals(UsuarioModelo.TIPO_USUARIO_PACIENTE)){
-        //    goToActivityPrincipalPaciente();
-        //}else{
-        goToActivityPrincipalMedico();
-        //}
+
+        if(usuarioLogueado.getTipoUsuario().equals(UsuarioModelo.TIPO_USUARIO_MEDICO)){
+            goToActivityPrincipalMedico();
+        }
 
     }
 

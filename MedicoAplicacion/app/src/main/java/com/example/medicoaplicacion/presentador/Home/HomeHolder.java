@@ -1,4 +1,4 @@
-package com.example.medicoaplicacion.presentador.reserva;
+package com.example.medicoaplicacion.presentador.Home;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -10,13 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.medicoaplicacion.R;
 import com.google.android.material.card.MaterialCardView;
 
-public class ReservaMHolder extends RecyclerView.ViewHolder{
-
-    public TextView txvName,txvFecha, txvHora, txvTurno;
+public class HomeHolder extends RecyclerView.ViewHolder {
+    public TextView txvName,txvFecha, txvHora,txvTurno;
     public ImageView imgPhoto;
     public MaterialCardView cvContainerReserva;
-    public ReservaMHolder(@NonNull View itemView) {
+    public HomeHolder(@NonNull View itemView) {
         super(itemView);
+
         txvName = itemView.findViewById(R.id.fullname_paciente_row);
         txvFecha = itemView.findViewById(R.id.fecha_Atencion_row);
         txvHora = itemView.findViewById(R.id.hora_atencion_row);
