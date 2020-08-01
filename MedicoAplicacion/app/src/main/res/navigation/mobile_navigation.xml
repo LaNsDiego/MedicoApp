@@ -29,7 +29,7 @@
         android:label="Horario de Atención" />
     <fragment
         android:id="@+id/cambiarContrasenaMFragment"
-        android:name="com.example.medicoaplicacion.vista.perfil.CambiarContrasenaMFragment"
+        android:name="com.example.medicoaplicacion.vista.perfil.CambiarContrasenaFragment"
         android:label="Cambiar Contraseña" />
     <fragment
         android:id="@+id/consultorioMFragment"
@@ -37,7 +37,7 @@
         android:label="Datos de Consultorio" />
     <fragment
         android:id="@+id/perfilMFragment"
-        android:name="com.example.medicoaplicacion.vista.perfil.PerfilMFragment"
+        android:name="com.example.medicoaplicacion.vista.perfil.PerfilFragment"
         android:label="Datos de Perfil" />
 
 <!--    verReserva Fragment-->

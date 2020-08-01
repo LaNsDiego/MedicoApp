@@ -36,7 +36,8 @@ public class ReservaMAdaptador extends RecyclerView.Adapter<ReservaMHolder> {
     public void onBindViewHolder(@NonNull ReservaMHolder holder, int position) {
             //SETEAR DATOS DEL XML
         final ReservaModelo reservaModelo = listaReservaModelo.get(position);
-        holder.txvName.setText(reservaModelo.getIdReserva());
+
+
         holder.txvName.setText(reservaModelo.getIdReserva());
         Picasso.get().load("http://i.imgur.com/DvpvklR.png").resize(160, 160).centerCrop().into(holder.imgPhoto);
 

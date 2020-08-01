@@ -3,7 +3,7 @@ package com.example.medicoaplicacion.modelo;
 import androidx.annotation.NonNull;
 
 import com.example.medicoaplicacion.interfaces.UsuarioInterface;
-import com.example.medicoaplicacion.interfaces.PerfilMInterface;
+import com.example.medicoaplicacion.interfaces.PerfilInterface;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -13,11 +13,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 
-import java.lang.reflect.Array;
-import java.util.List;
 import java.util.Map;
 
-public class UsuarioModelo implements UsuarioInterface.Modelo, PerfilMInterface.Modelo {
+public class UsuarioModelo implements UsuarioInterface.Modelo, PerfilInterface.Modelo {
 
     //CONSTANTES DE TIPO USUARIO
     public static String TIPO_USUARIO_MEDICO = "MEDICO";
@@ -58,7 +56,7 @@ public class UsuarioModelo implements UsuarioInterface.Modelo, PerfilMInterface.
     private FirebaseAuth auth;
     //PRESENTADOR
     UsuarioInterface.Presentador presentador;
-    PerfilMInterface.Presentador presentadorperfil;
+    PerfilInterface.Presentador presentadorperfil;
 
     public UsuarioModelo() { }
 
@@ -67,7 +65,7 @@ public class UsuarioModelo implements UsuarioInterface.Modelo, PerfilMInterface.
         this.auth = FirebaseAuth.getInstance();
     }
 
-    public UsuarioModelo(PerfilMInterface.Presentador presentadorperfil) {
+    public UsuarioModelo(PerfilInterface.Presentador presentadorperfil) {
         this.presentadorperfil = presentadorperfil;
         this.auth = FirebaseAuth.getInstance();
     }
@@ -302,10 +300,28 @@ public class UsuarioModelo implements UsuarioInterface.Modelo, PerfilMInterface.
 
 
     @Override
-    public void ObtenerPorIdReserva(String idUsuario) {
+    public void ObtenerPorIdUsuario(String idUsuario) {
 
-        UsuarioModelo objUsuario = new UsuarioModelo();
-        objUsuario.setNombres("Yonathan William Mamani Calisaya");
+        UsuarioModelo obj1 = new UsuarioModelo();
+        obj1.setIdUsuario(idUsuario);
+        obj1.setTipoDocumento("DNI");
+        obj1.setNroDocumento("70359383");
+        obj1.setNombres("Yonathan William Mamani Calisaya");
+        obj1.setFechaNacimiento("1996/03/22");
+        obj1.setEdad(24);
+        obj1.setEmail("yonathanwilliammc@gmail.com");
+        obj1.setCelular("9287736474");
+        obj1.setAvatar("avatar");
+        obj1.setPais("Perú");
+        obj1.setSexo("Hombre");
+        obj1.setEstado("Activo");
+        obj1.setTipoUsuario("Medico");
+
+        obj1.setIdEspecialidad("Medico General");
+        obj1.setTelefono("2344483837");
+        obj1.setBiografia("Medico General con 10 años de experiencia");
+
+
 
 
     }

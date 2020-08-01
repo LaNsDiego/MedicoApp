@@ -43,7 +43,7 @@
                     android:textAppearance="?android:attr/textAppearanceListItem"
                     android:textColor="#212121"
                     android:textSize="30dp"
-                    android:textStyle="bold" />
+                    />
 
                 <ImageView
                     android:id="@+id/imageView2"

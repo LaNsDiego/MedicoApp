@@ -2,10 +2,10 @@ package com.example.medicoaplicacion.interfaces;
 
 import com.example.medicoaplicacion.modelo.UsuarioModelo;
 
-public interface PerfilMInterface {
+public interface PerfilInterface {
 
     interface VistaPerfil{
-        void menejadorVerPerfil(); ///1
+        void menejadorVerPerfil(String idUsuario); ///1
         void manejadorVerPerfilExitoso(UsuarioModelo objUsuario); //5.1
     }
 
@@ -20,7 +20,6 @@ public interface PerfilMInterface {
     }
 
     interface Modelo{
-        void ObtenerPorIdReserva(String idUsuario);  /// 3
-
+        void ObtenerPorIdUsuario(String idUsuario);  /// 3
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".vista.medico.consultorio.ConsultorioMFragment">
+    tools:context=".vista.consultorio.ConsultorioMFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <ScrollView
@@ -26,19 +26,21 @@
                 android:src="@drawable/ic_lock_black_24dp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tfTipoDocumento"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nombre">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
+                    android:id="@+id/tfTipoDocumento"
+                    android:text="Centro Consultorio Tacna"
                     android:layout_height="wrap_content"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tfNroDocumento"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -47,11 +49,13 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/tfDireccion"
+                    android:text="Av. bolognesi 405"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tfReferencia"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -60,11 +64,13 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/tfReferencia"
+                    android:text="Cerca al pasaje Vigil"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tfNombresApellidos"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -72,12 +78,14 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
+                    android:id="@+id/tfTelefono"
+                    android:text="9485747373"
                     android:layout_height="wrap_content"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tfEmail"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -85,12 +93,14 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
+                    android:id="@+id/tfCelular"
+                    android:text="92848373"
                     android:layout_height="wrap_content"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tfCelular"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -98,6 +108,8 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
+                    android:id="@+id/tfEmail"
+                    android:text="clinicaTacna@gmail.com"
                     android:layout_height="wrap_content"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -105,7 +117,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tfEspecialidad"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -114,11 +126,14 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/tfEspecialidad"
+                    android:text="Cardiologoia"
+
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tfNroColegiatura"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -126,13 +141,15 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
+                    android:id="@+id/tfPrecioConsulta"
+                    android:text="80.00"
                     android:layout_height="wrap_content"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tfBiografia"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -140,8 +157,10 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
+                    android:id="@+id/tfServiciosOfrecidos"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
+                    android:text="consulta Medica, Radiografia, Mamografia"
 
                     />
             </com.google.android.material.textfield.TextInputLayout>

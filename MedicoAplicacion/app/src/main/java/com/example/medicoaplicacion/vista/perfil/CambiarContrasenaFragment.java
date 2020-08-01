@@ -13,10 +13,10 @@ import com.example.medicoaplicacion.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link CambiarContrasenaMFragment#newInstance} factory method to
+ * Use the {@link CambiarContrasenaFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CambiarContrasenaMFragment extends Fragment {
+public class CambiarContrasenaFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -26,7 +26,7 @@ public class CambiarContrasenaMFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public CambiarContrasenaMFragment() {
+    public CambiarContrasenaFragment() {
         // Required empty public constructor
     }
 
@@ -39,8 +39,8 @@ public class CambiarContrasenaMFragment extends Fragment {
      * @return A new instance of fragment CambiarContrasenaMFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CambiarContrasenaMFragment newInstance(String param1, String param2) {
-        CambiarContrasenaMFragment fragment = new CambiarContrasenaMFragment();
+    public static CambiarContrasenaFragment newInstance(String param1, String param2) {
+        CambiarContrasenaFragment fragment = new CambiarContrasenaFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
