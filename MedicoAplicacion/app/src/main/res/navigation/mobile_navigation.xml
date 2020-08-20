@@ -25,11 +25,11 @@
 
     <fragment
         android:id="@+id/atencionMFragment"
-        android:name="com.example.medicoaplicacion.vista.diaatencion.ListarDiaAtencionFragment"
+        android:name="com.example.medicoaplicacion.vista.horarioatencion.ListarHorarioAtencionFragment"
         android:label="Horario de Atención" />
     <fragment
         android:id="@+id/cambiarContrasenaMFragment"
-        android:name="com.example.medicoaplicacion.vista.perfil.CambiarContrasenaFragment"
+        android:name="com.example.medicoaplicacion.vista.cambiarcontrasena.CambiarContrasenaFragment"
         android:label="Cambiar Contraseña" />
     <fragment
         android:id="@+id/consultorioMFragment"
@@ -45,4 +45,14 @@
         android:id="@+id/verReservaMFragment"
         android:name="com.example.medicoaplicacion.vista.reserva.VerReservaFragment"
         android:label="Datos de  Rserva" />
+    <fragment
+        android:id="@+id/listarHorarioAtencionFragment"
+        android:name="com.example.medicoaplicacion.vista.diaatencion.ListarHorarioAtencionFragmentmal"
+        android:label="Horario de Atención"
+        />
+    <fragment
+        android:id="@+id/registrarFragment"
+        android:name="com.example.medicoaplicacion.vista.registrar.RegistrarFragment"
+        android:label="fragment_registrar"
+        tools:layout="@layout/fragment_registrar" />
 </navigation>

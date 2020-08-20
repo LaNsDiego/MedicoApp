@@ -8,6 +8,8 @@ public interface UsuarioInterface {
         void manejadorIniciarSesion();
         void manejadorInicioSesionExitoso(UsuarioModelo usuarioLogueado);
         void manejadorInicioSesionFallido();
+
+        void nuevo_registro();
     }
 
     interface Presentador{

@@ -1,20 +1,21 @@
 package com.example.medicoaplicacion.presentador.horarioatencion;
 
-import com.example.medicoaplicacion.interfaces.DiaAtencionInterface;
-import com.example.medicoaplicacion.interfaces.HorarioAtencionInterface;
+import com.example.medicoaplicacion.interfaces.HorarioAtencionListarInterface;
 import com.example.medicoaplicacion.modelo.HorarioAtencionModelo;
 
 import java.util.List;
 
-public class ListarHorarioAtencionPresentador implements HorarioAtencionInterface.Presentador {
+public class ListarHorarioAtencionPresentador implements HorarioAtencionListarInterface.Presentador {
 
-    HorarioAtencionInterface.Modelo horarioAtencionModelo;
-    HorarioAtencionInterface.VistaListar vistaList;
+    HorarioAtencionListarInterface.Modelo horarioAtencionModelo;
+    HorarioAtencionListarInterface.VistaListar vistaListar;
 
-    public ListarHorarioAtencionPresentador(HorarioAtencionInterface.VistaListar vistaList) {
+
+    public ListarHorarioAtencionPresentador(HorarioAtencionListarInterface.VistaListar vistaListar) {
+        this.vistaListar = vistaListar;
         horarioAtencionModelo = new HorarioAtencionModelo(this);
-        this.vistaList = vistaList;
     }
+
 
     @Override
     public void ejecutarListarHorarioAtencion() {
@@ -23,11 +24,11 @@ public class ListarHorarioAtencionPresentador implements HorarioAtencionInterfac
 
     @Override
     public void cuandoListaHorarioAtencionExitoso(List<HorarioAtencionModelo> list) {
-        vistaList.manejadorListaHorarioAtencionExitoso(list);
+        vistaListar.manejadorListaHorarioAtencionExitoso(list);
     }
 
-    @Override
-    public void cuandoListaHorarioAtencionFallido() {
 
-    }
+
+
+
 }

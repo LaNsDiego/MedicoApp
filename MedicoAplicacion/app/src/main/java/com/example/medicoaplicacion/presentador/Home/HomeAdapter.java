@@ -45,7 +45,7 @@ public class HomeAdapter  extends RecyclerView.Adapter<HomeHolder>{
         holder.txvHora.setText(reservaModelo.getHoraAtencion());
         holder.txvTurno.setText(reservaModelo.getTurnoAtencion());
 
-        Picasso.get().load("https://www.pngfind.com/pngs/m/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png").resize(160, 160).centerCrop().into(holder.imgPhoto);
+        Picasso.get().load("https://noverbal.es/uploads/blog/rostro-de-un-criminal.jpg").resize(150, 150).centerCrop().into(holder.imgPhoto);
 
         holder.cvContainerReserva.setOnClickListener(new View.OnClickListener() {
             @Override

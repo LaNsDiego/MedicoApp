@@ -1,26 +1,49 @@
 package com.example.medicoaplicacion.modelo;
 
-import com.example.medicoaplicacion.interfaces.HorarioAtencionInterface;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.example.medicoaplicacion.interfaces.HorarioAtencionAgregarInterface;
+import com.example.medicoaplicacion.interfaces.HorarioAtencionListarInterface;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HorarioAtencionModelo implements HorarioAtencionInterface.Modelo {
+public class HorarioAtencionModelo implements HorarioAtencionListarInterface.Modelo, HorarioAtencionAgregarInterface.Modelo, Serializable {
+
 
     private String idHorarioAtencion;
-    private String idDiaAtencion;
+    private String idConsultorio;
+    private String dia;
+    private String nroDia;
     private String horaInicio;
     private String horaFin;
     private String estado;
 
-    HorarioAtencionInterface.Presentador presentadorHorarioAtencion;
 
-    public HorarioAtencionModelo(HorarioAtencionInterface.Presentador presentadorHorarioAtencion) {
-        this.presentadorHorarioAtencion = presentadorHorarioAtencion;
-    }
+    HorarioAtencionListarInterface.Presentador presentadorListarHorarioAtencion;
+    HorarioAtencionAgregarInterface.Presentador presentadorAgregarHorarioAtencion;
+
+
 
     public HorarioAtencionModelo() {
 
+    }
+
+    public HorarioAtencionModelo(HorarioAtencionAgregarInterface.Presentador presentadorAgregarHorarioAtencion) {
+        this.presentadorAgregarHorarioAtencion = presentadorAgregarHorarioAtencion;
+    }
+
+    public HorarioAtencionModelo(HorarioAtencionListarInterface.Presentador presentadorListarHorarioAtencion) {
+        this.presentadorListarHorarioAtencion = presentadorListarHorarioAtencion;
     }
 
 
@@ -32,12 +55,20 @@ public class HorarioAtencionModelo implements HorarioAtencionInterface.Modelo {
         this.idHorarioAtencion = idHorarioAtencion;
     }
 
-    public String getIdDiaAtencion() {
-        return idDiaAtencion;
+    public String getIdConsultorio() {
+        return idConsultorio;
     }
 
-    public void setIdDiaAtencion(String idDiaAtencion) {
-        this.idDiaAtencion = idDiaAtencion;
+    public void setIdConsultorio(String idConsultorio) {
+        this.idConsultorio = idConsultorio;
+    }
+
+    public String getDia() {
+        return dia;
+    }
+
+    public void setDia(String dia) {
+        this.dia = dia;
     }
 
     public String getHoraInicio() {
@@ -64,54 +95,59 @@ public class HorarioAtencionModelo implements HorarioAtencionInterface.Modelo {
         this.estado = estado;
     }
 
+    public String getNroDia() {
+        return nroDia;
+    }
+
+    public void setNroDia(String nroDia) {
+        this.nroDia = nroDia;
+    }
 
     @Override
     public void listarHorarioAtencion(String idDiaAtencion) {
 
-        HorarioAtencionModelo horarioAtencionModelo1 = new HorarioAtencionModelo();
-        HorarioAtencionModelo horarioAtencionModelo2 = new HorarioAtencionModelo();
-        HorarioAtencionModelo horarioAtencionModelo3 = new HorarioAtencionModelo();
-        HorarioAtencionModelo horarioAtencionModelo4 = new HorarioAtencionModelo();
-        HorarioAtencionModelo horarioAtencionModelo5 = new HorarioAtencionModelo();
+        Conexion.getCollectionHorarioAtencion().orderBy("dia",Query.Direction.ASCENDING)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                     @Override
+                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-        horarioAtencionModelo1.setIdHorarioAtencion("1");
-        horarioAtencionModelo1.setIdDiaAtencion(idDiaAtencion);
-        horarioAtencionModelo1.setHoraInicio("10:00");
-        horarioAtencionModelo1.setHoraFin("12:00");
-        horarioAtencionModelo1.setEstado("Activo");
+                         final List<HorarioAtencionModelo> listaHorario = new ArrayList<>();
+                         for (DocumentSnapshot document : task.getResult().getDocuments()){
+                             HorarioAtencionModelo horario = document.toObject(HorarioAtencionModelo.class);
+                             Log.d("LISTA",horario.getDia());
+                             listaHorario.add(horario);
 
-        horarioAtencionModelo2.setIdHorarioAtencion("2");
-        horarioAtencionModelo2.setIdDiaAtencion(idDiaAtencion);
-        horarioAtencionModelo2.setHoraInicio("12:00");
-        horarioAtencionModelo2.setHoraFin("14:00");
-        horarioAtencionModelo2.setEstado("Activo");
+                         }
+                         presentadorListarHorarioAtencion.cuandoListaHorarioAtencionExitoso(listaHorario);
+                     }
+                 }
 
-        horarioAtencionModelo3.setIdHorarioAtencion("3");
-        horarioAtencionModelo3.setIdDiaAtencion(idDiaAtencion);
-        horarioAtencionModelo3.setHoraInicio("14:00");
-        horarioAtencionModelo3.setHoraFin("16:00");
-        horarioAtencionModelo3.setEstado("Activo");
+        );
 
-        horarioAtencionModelo4.setIdHorarioAtencion("4");
-        horarioAtencionModelo4.setIdDiaAtencion(idDiaAtencion);
-        horarioAtencionModelo4.setHoraInicio("16:00");
-        horarioAtencionModelo4.setHoraFin("18:00");
-        horarioAtencionModelo4.setEstado("Activo");
 
-        horarioAtencionModelo5.setIdHorarioAtencion("5");
-        horarioAtencionModelo5.setIdDiaAtencion(idDiaAtencion);
-        horarioAtencionModelo5.setHoraInicio("18:00");
-        horarioAtencionModelo5.setHoraFin("20:00");
-        horarioAtencionModelo5.setEstado("Activo");
-
-       List<HorarioAtencionModelo> lista = new ArrayList<>();
-       lista.add(horarioAtencionModelo1);
-       lista.add(horarioAtencionModelo2);
-       lista.add(horarioAtencionModelo3);
-       lista.add(horarioAtencionModelo4);
-       lista.add(horarioAtencionModelo5);
-
-        presentadorHorarioAtencion.cuandoListaHorarioAtencionExitoso(lista);
 
     }
+
+    @Override
+    public void agregarHorarioAtencion(final HorarioAtencionModelo objhorario) {
+
+        final DocumentReference nuevo = Conexion.getCollectionHorarioAtencion().document();
+        nuevo.set(objhorario).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+
+                    presentadorAgregarHorarioAtencion.cuandoAgregarHorarioAtencionExitoso(objhorario);
+
+                }else{
+
+                    presentadorAgregarHorarioAtencion.cuandoAgregarHorarioAtencionFallido();
+
+                }
+            }
+        });
+
+    }
+
+
 }

@@ -8,7 +8,7 @@ public interface DiaAtencionInterface {
 
     interface VistaList{
         void menejadorListarDiasAtencion(); ///1
-
+        void NuevoHorarioAtencion(); ///1
         void manejadorListaDiasAtencionExitoso(List<DiaAtencionModelo> list); //5.1
     }
 

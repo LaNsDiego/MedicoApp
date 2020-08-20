@@ -1,9 +1,13 @@
 package com.example.medicoaplicacion.modelo;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.medicoaplicacion.interfaces.CambiarContrasenaInterface;
+import com.example.medicoaplicacion.interfaces.RegistrarInterface;
 import com.example.medicoaplicacion.interfaces.UsuarioInterface;
 import com.example.medicoaplicacion.interfaces.PerfilInterface;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -13,11 +17,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.Map;
 
-public class UsuarioModelo implements UsuarioInterface.Modelo, PerfilInterface.Modelo {
+public class UsuarioModelo implements UsuarioInterface.Modelo, PerfilInterface.Modelo, CambiarContrasenaInterface.Modelo, RegistrarInterface.Modelo {
 
     //CONSTANTES DE TIPO USUARIO
     public static String TIPO_USUARIO_MEDICO = "MEDICO";
@@ -26,41 +31,44 @@ public class UsuarioModelo implements UsuarioInterface.Modelo, PerfilInterface.M
 
     //usuario
     private String idUsuario;
+    private String tipoUsuario;
+
     private String usuario;
     private String clave;
+    private String nuevaClave;
+    private String repetirClave;
     private String tipoDocumento;
     private String nroDocumento;
     private String nombres;
     private String fechaNacimiento;
-    private int edad;
+    private String idEspecialidad;
+    private String especialidad;
+    private String colegiatura;
+    private String telefono;
+    private String biografia;
     private String email;
     private String celular;
     private String avatar;
-    private String pais;
-    private String ciudad;
-    private String distrito;
     private String sexo;
     private String estado;
     private String fecha;
-    private String tipoUsuario;
-    //MEDICO
-    private String idEspecialidad;
-    private String telefono;
-    private String biografia;
-    //PACIENTE
-    private double peso;
-    private double talla;
-    private String direccion;
 
-    private Map<String,Object> datosExtra;
+
 
     //FIRESTORE DATOS
     private FirebaseAuth auth;
     //PRESENTADOR
     UsuarioInterface.Presentador presentador;
     PerfilInterface.Presentador presentadorperfil;
+    CambiarContrasenaInterface.Presentador presentadorCambiarContrasena;
+    RegistrarInterface.Presentador presentadorRegistrar;
 
     public UsuarioModelo() { }
+
+    public UsuarioModelo(RegistrarInterface.Presentador presentadorRegistrar) {
+        this.presentadorRegistrar = presentadorRegistrar;
+        this.auth = FirebaseAuth.getInstance();
+    }
 
     public UsuarioModelo(UsuarioInterface.Presentador presentador) {
         this.presentador = presentador;
@@ -72,6 +80,11 @@ public class UsuarioModelo implements UsuarioInterface.Modelo, PerfilInterface.M
         this.auth = FirebaseAuth.getInstance();
     }
 
+    public UsuarioModelo(CambiarContrasenaInterface.Presentador presentadorCambiarContrasena) {
+        this.presentadorCambiarContrasena = presentadorCambiarContrasena;
+        this.auth = FirebaseAuth.getInstance();
+    }
+
 
     public String getIdUsuario() {
         return idUsuario;
@@ -79,6 +92,14 @@ public class UsuarioModelo implements UsuarioInterface.Modelo, PerfilInterface.M
 
     public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
     public String getUsuario() {
@@ -95,6 +116,22 @@ public class UsuarioModelo implements UsuarioInterface.Modelo, PerfilInterface.M
 
     public void setClave(String clave) {
         this.clave = clave;
+    }
+
+    public String getNuevaClave() {
+        return nuevaClave;
+    }
+
+    public void setNuevaClave(String nuevaClave) {
+        this.nuevaClave = nuevaClave;
+    }
+
+    public String getRepetirClave() {
+        return repetirClave;
+    }
+
+    public void setRepetirClave(String repetirClave) {
+        this.repetirClave = repetirClave;
     }
 
     public String getTipoDocumento() {
@@ -129,12 +166,44 @@ public class UsuarioModelo implements UsuarioInterface.Modelo, PerfilInterface.M
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public int getEdad() {
-        return edad;
+    public String getIdEspecialidad() {
+        return idEspecialidad;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setIdEspecialidad(String idEspecialidad) {
+        this.idEspecialidad = idEspecialidad;
+    }
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    public String getColegiatura() {
+        return colegiatura;
+    }
+
+    public void setColegiatura(String colegiatura) {
+        this.colegiatura = colegiatura;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getBiografia() {
+        return biografia;
+    }
+
+    public void setBiografia(String biografia) {
+        this.biografia = biografia;
     }
 
     public String getEmail() {
@@ -161,30 +230,6 @@ public class UsuarioModelo implements UsuarioInterface.Modelo, PerfilInterface.M
         this.avatar = avatar;
     }
 
-    public String getPais() {
-        return pais;
-    }
-
-    public void setPais(String pais) {
-        this.pais = pais;
-    }
-
-    public String getCiudad() {
-        return ciudad;
-    }
-
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
-    }
-
-    public String getDistrito() {
-        return distrito;
-    }
-
-    public void setDistrito(String distrito) {
-        this.distrito = distrito;
-    }
-
     public String getSexo() {
         return sexo;
     }
@@ -209,70 +254,6 @@ public class UsuarioModelo implements UsuarioInterface.Modelo, PerfilInterface.M
         this.fecha = fecha;
     }
 
-    public String getIdEspecialidad() {
-        return idEspecialidad;
-    }
-
-    public void setIdEspecialidad(String idEspecialidad) {
-        this.idEspecialidad = idEspecialidad;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getBiografia() {
-        return biografia;
-    }
-
-    public void setBiografia(String biografia) {
-        this.biografia = biografia;
-    }
-
-    public double getPeso() {
-        return peso;
-    }
-
-    public void setPeso(double peso) {
-        this.peso = peso;
-    }
-
-    public double getTalla() {
-        return talla;
-    }
-
-    public void setTalla(double talla) {
-        this.talla = talla;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getTipoUsuario() {
-        return tipoUsuario;
-    }
-
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }
-
-    public Map<String, Object> getDatosExtra() {
-        return datosExtra;
-    }
-
-    public void setDatosExtra(Map<String, Object> datosExtra) {
-        this.datosExtra = datosExtra;
-    }
-
     @Override
     public void iniciarSesion(String usuario , String clave) {
 
@@ -280,8 +261,12 @@ public class UsuarioModelo implements UsuarioInterface.Modelo, PerfilInterface.M
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 final FirebaseUser currentUser =  auth.getCurrentUser();
-//                Log.d("LOGIN",currentUser.getUid().toString());
-                if(currentUser != null){
+                Log.d("LOGIN",currentUser.getUid().toString());
+                if(task.isSuccessful()) {
+                    UsuarioModelo obj = new UsuarioModelo();
+
+                    //presentador.cuandoInicioSesionExitoso(obj);
+
                     Conexion.getCollectionUsuario().document(currentUser.getUid()).get()
                             .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                 @Override
@@ -307,33 +292,147 @@ public class UsuarioModelo implements UsuarioInterface.Modelo, PerfilInterface.M
                 }
             }
         });
+/*
+        auth.signInWithEmailAndPassword(email, clave).addOnCompleteListener(this, OnCompleteListener { task ->
+            if(task.isSuccessful) {
+                Toast.makeText(this, "Successfully Logged In", Toast.LENGTH_LONG).show()
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }else {
+                Toast.makeText(this, "Login Failed", Toast.LENGTH_LONG).show()
+            }
+        })
+*/
+
     }
 
 
     @Override
     public void ObtenerPorIdUsuario(String idUsuario) {
 
-        UsuarioModelo obj1 = new UsuarioModelo();
-        obj1.setIdUsuario(idUsuario);
-        obj1.setTipoDocumento("DNI");
-        obj1.setNroDocumento("70359383");
-        obj1.setNombres("Yonathan William Mamani Calisaya");
-        obj1.setFechaNacimiento("1996/03/22");
-        obj1.setEdad(24);
-        obj1.setEmail("yonathanwilliammc@gmail.com");
-        obj1.setCelular("9287736474");
-        obj1.setAvatar("avatar");
-        obj1.setPais("Perú");
-        obj1.setSexo("Hombre");
-        obj1.setEstado("Activo");
-        obj1.setTipoUsuario("Medico");
+        Conexion.getCollectionUsuario().document(idUsuario)
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                   @Override
+                   public void onSuccess(DocumentSnapshot documentSnapshot) {
+                       if(documentSnapshot.exists()){
+                           final UsuarioModelo usuario = documentSnapshot.toObject(UsuarioModelo.class);
+                           if(usuario != null){
+                               presentadorperfil.cuandoVerPerfilExitoso(usuario);
+                           }
 
-        obj1.setIdEspecialidad("Medico General");
-        obj1.setTelefono("2344483837");
-        obj1.setBiografia("Medico General con 10 años de experiencia");
+                       }else{
+                           presentadorperfil.cuandoVerPerfilFallido();
+                       }
+                   }
+               }
 
+        );
 
 
 
     }
+
+    @Override
+    public void actualizarPerfil(final UsuarioModelo objUsuario) {
+
+        Conexion.getCollectionUsuario().document(objUsuario.getIdUsuario())
+                .update(
+                        "tipoDocumento",objUsuario.getTipoDocumento(),
+                        "nroDocumento",objUsuario.getNroDocumento(),
+                        "nombres",objUsuario.getNombres(),
+                        "email",objUsuario.getEmail(),
+                        "celular",objUsuario.getCelular(),
+                        "fechaNacimiento",objUsuario.getFechaNacimiento(),
+                        "especialidad",objUsuario.getEspecialidad(),
+                        "colegiatura",objUsuario.getColegiatura(),
+                        "biografia",objUsuario.getBiografia()
+                ).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    presentadorperfil.cuandoActualizarPerfilExitoso(objUsuario);
+                }else{
+                    presentadorperfil.cuandoActualizarPerfilFallido();
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void actualizarContrasena(UsuarioModelo objUsuario) {
+        UsuarioModelo obj1 = objUsuario;
+
+        presentadorCambiarContrasena.cuandoActualizarContrasenaExitoso(obj1);
+    }
+
+    @Override
+    public void nuevoMedico(final UsuarioModelo objUsuario) {
+
+        //presentadorRegistrar.cuandoRegistrarMedicoExitoso(objUsuario);
+        //UsuarioModelo obj1 = objUsuario;
+       // add--nuevo
+       // get lista
+       // document  buscar por id
+        // set autogenera el id
+
+        auth.createUserWithEmailAndPassword(objUsuario.getUsuario(),objUsuario.getClave()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    objUsuario.setIdUsuario(task.getResult().getUser().getUid());
+                    objUsuario.setEmail(objUsuario.getUsuario());
+                    objUsuario.setEstado("Activo");
+                    objUsuario.setTipoUsuario("Medico");
+
+                    Log.d("NEWUSUARIO_CREADO",objUsuario.getIdUsuario());
+                    final DocumentReference nuevo = Conexion.getCollectionUsuario().document(objUsuario.getIdUsuario());
+                    nuevo.set(objUsuario).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()){
+
+                                nuevoUsuario(objUsuario);
+
+                            }else{
+                                presentadorRegistrar.cuandoRegistrarMedicoFallido();
+                            }
+                        }
+                    });
+
+
+
+                }else{
+
+                }
+            }
+        });
+    }
+
+    @Override
+    public void nuevoUsuario(final UsuarioModelo objUsuario) {
+
+        final ConsultorioModelo consultorioModelo = new ConsultorioModelo();
+        consultorioModelo.setIdMedico(objUsuario.getIdUsuario());
+        consultorioModelo.setIdConsultorio(objUsuario.getIdUsuario());
+
+        final DocumentReference nuevo = Conexion.getCollectionConsultorio().document(objUsuario.getIdUsuario());
+        nuevo.set(consultorioModelo).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+
+                    presentadorRegistrar.cuandoRegistrarMedicoExitoso(objUsuario);
+
+                }else{
+                    presentadorRegistrar.cuandoRegistrarMedicoFallido();
+                }
+            }
+        });
+    }
+
+
+
+
 }

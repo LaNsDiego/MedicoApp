@@ -28,35 +28,80 @@
             android:padding="8dp"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_gravity="center_vertical"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tv_dia_horarioatencion_row"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:breakStrategy="simple"
+                android:text="Lunes"
+                android:layout_gravity="center"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textColor="#5D5B83"
+                android:textSize="25dp"
+                android:layout_weight="1"
 
-                <TextView
-                    android:id="@+id/name_horario_atencion_row"
+                />
+
+                <LinearLayout
+                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:breakStrategy="simple"
-                    android:text="10:00 - 12:00 "
-                    android:textAppearance="?android:attr/textAppearanceListItem"
-                    android:textColor="#212121"
-                    android:textSize="30dp"
-                    android:layout_weight="1"
-                     />
-
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
 
 
-                    android:layout_gravity="center"
-                    app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp" />
+                    <TextView
+                        android:id="@+id/tv_horainicio_horarioatencion_row"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:breakStrategy="simple"
+                        android:text="10:00"
+                        android:textAppearance="?android:attr/textAppearanceListItem"
+                        android:textColor="#ACA9C5"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:textSize="15dp"
+                        android:layout_weight="1"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_horafin_horarioatencion_row"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:breakStrategy="simple"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:text="12:00"
+                        android:textAppearance="?android:attr/textAppearanceListItem"
+                        android:textColor="#ACA9C5"
+                        android:textSize="15dp"
+                        android:layout_weight="1"
+                        />
 
 
-            </LinearLayout>
+                </LinearLayout>
+        <LinearLayout
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_estado_horarioatencion_row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:breakStrategy="simple"
+                android:layout_gravity="center"
+                android:gravity="right"
+                android:text="Activo"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textColor="#5D5B83"
+                android:textSize="18dp"
+
+                />
+        </LinearLayout>
+
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

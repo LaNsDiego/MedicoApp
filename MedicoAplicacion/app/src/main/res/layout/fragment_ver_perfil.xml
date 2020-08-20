@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F4F4F4"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".vista.perfil.PerfilFragment">
 
@@ -14,38 +15,41 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="15dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
             >
 
-
             <com.google.android.material.textfield.TextInputLayout
-
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:boxStrokeColor="#000000"
+                app:boxBackgroundColor="#FFFFFF"
                 android:hint="Tipo Documento">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
+                <AutoCompleteTextView
                     android:id="@+id/tfTipoDocumento"
-                    app:boxStrokeColor="#000000"
-                    android:text="DNI"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:inputType="none"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
+
+
             <com.google.android.material.textfield.TextInputLayout
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                app:boxBackgroundColor="#FFFFFF"
+                android:layout_marginTop="8dp"
                 android:hint="Nro Documento">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:id="@+id/tfNroDocumento"
-                    android:text="70359383"
+                    android:text=""
                     android:layout_height="wrap_content"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -54,13 +58,14 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                app:boxBackgroundColor="#FFFFFF"
+                android:layout_marginTop="8dp"
                 android:hint="Nombres y Apellidos">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:id="@+id/tfNombresApellidos"
-                    android:text="Yonathan William Mamani Calisaya"
+                    android:text=""
                     android:layout_height="wrap_content"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -69,14 +74,15 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                app:boxBackgroundColor="#FFFFFF"
+                android:layout_marginTop="8dp"
                 android:hint="Email">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:id="@+id/tfEmail"
                     android:layout_height="wrap_content"
-                    android:text="yonathanwilliammc@gmail.com"
+                    android:text=""
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,13 +90,14 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                app:boxBackgroundColor="#FFFFFF"
+                android:layout_marginTop="8dp"
                 android:hint="Celular">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:id="@+id/tfCelular"
-                    android:text="928784737"
+                    android:text=""
                     android:layout_height="wrap_content"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -99,29 +106,33 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                app:boxBackgroundColor="#FFFFFF"
+                android:layout_marginTop="8dp"
                 android:hint="Fecha Nacimiento">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tfFechaNacimiento"
-                    android:text="1996/03/22"
+                    android:inputType="date"
+                    android:text=""
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
 
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
+                app:boxBackgroundColor="#FFFFFF"
                 android:hint="Especialidad">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
+                <AutoCompleteTextView
                     android:id="@+id/tfEspecialidad"
-                    android:text="Medicina General"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="none"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -129,14 +140,15 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                app:boxBackgroundColor="#FFFFFF"
+                android:layout_marginTop="8dp"
                 android:hint="NroColegiatura">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tfNroColegiatura"
-                    android:text="203048"
+                    android:text=""
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -145,7 +157,8 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                app:boxBackgroundColor="#FFFFFF"
+                android:layout_marginTop="8dp"
                 android:hint="Biografia">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -153,16 +166,16 @@
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
                     android:id="@+id/tfBiografia"
-                    android:text="mas de 5 años de experiencia en el sector publcio en el hospital Hipolito Unanue"
+                    android:text=""
 
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <Button
-                android:id="@+id/containedButton"
+                android:id="@+id/btnActualizarPerfil"
                 android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:layout_height="wrap_content"
                 android:text="GUARDAR"
                 />

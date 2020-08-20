@@ -11,19 +11,52 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="#03A9F4"
-        android:orientation="vertical">
+        android:layout_height="160dp"
+        android:background="@drawable/headerreserva"
+        android:orientation="horizontal">
+
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/profile_image"
-            android:layout_width="96dp"
+            android:layout_width="105dp"
             android:layout_gravity="center"
-            android:layout_height="96dp"
+            android:layout_height="105dp"
             android:padding="10dp"
-            android:src="@drawable/ic_business_black_24dp"
-            app:civ_border_width="2dp"
-            app:civ_border_color="#FF000000"/>
+            android:src="@drawable/medico"
+
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:paddingTop="40dp"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:text="Juan Perez, Quiroz Torres"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:textSize="15dp"
+                android:text="Cardiologo"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:text="Clinica la Luz"
+                />
+        </LinearLayout>
+
     </LinearLayout>
 
     <com.google.android.material.card.MaterialCardView
@@ -134,6 +167,35 @@
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnActualizarPerfil"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:layout_margin="20dp"
+            android:text="CONFIRMAR"
+            />
+
+        <Button
+            android:id="@+id/btnActualizarPerfil1"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            app:backgroundTint="#e91e63"
+            android:text="ANULAR"
+            android:layout_margin="20dp"
+            />
+
+    </LinearLayout>
+
 
 
 

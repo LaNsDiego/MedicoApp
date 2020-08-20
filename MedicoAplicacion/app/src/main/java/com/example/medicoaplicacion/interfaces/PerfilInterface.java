@@ -5,21 +5,29 @@ import com.example.medicoaplicacion.modelo.UsuarioModelo;
 public interface PerfilInterface {
 
     interface VistaPerfil{
-        void menejadorVerPerfil(String idUsuario); ///1
+        void menejadorVerPerfil(); ///1
         void manejadorVerPerfilExitoso(UsuarioModelo objUsuario); //5.1
+
+        void actualizarPerfil();
+        void manejadorActualizarPerfilExitoso(UsuarioModelo objUsuario); //5.1
+        void manejadorActualizarPerfilFallido(); //5.1
     }
 
     interface Presentador{
 
-        void ejecutarVerPerfil(); /// general el arraylist  2
+        void ejecutarVerPerfil(String idUsuario); /// general el arraylist  2
         void cuandoVerPerfilExitoso(UsuarioModelo objUsuario); // 4.1
         void cuandoVerPerfilFallido(); // // 4.1
 
+        void ejecutarActualizarPerfil(UsuarioModelo objUsuario); /// general el arraylist  2
+        void cuandoActualizarPerfilExitoso(UsuarioModelo objUsuario); // 4.1
+        void cuandoActualizarPerfilFallido(); // // 4.1
 
 
     }
 
     interface Modelo{
         void ObtenerPorIdUsuario(String idUsuario);  /// 3
+        void actualizarPerfil(UsuarioModelo objUsuario);  /// 3
     }
 }

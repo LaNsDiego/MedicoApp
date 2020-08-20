@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F4F4F4"
     tools:context=".vista.consultorio.ConsultorioMFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -14,7 +15,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="15dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
             >
 
             <ImageView
@@ -29,28 +33,31 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:boxBackgroundColor="#FFFFFF"
                 android:hint="Nombre">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:id="@+id/tfTipoDocumento"
-                    android:text="Centro Consultorio Tacna"
+                    android:id="@+id/tfnombre"
+                    android:text=""
                     android:layout_height="wrap_content"
                     />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
+                app:boxBackgroundColor="#FFFFFF"
                 android:hint="Dirección">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tfDireccion"
-                    android:text="Av. bolognesi 405"
+                    android:text=""
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -58,14 +65,15 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
+                app:boxBackgroundColor="#FFFFFF"
                 android:hint="Referencia">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tfReferencia"
-                    android:text="Cerca al pasaje Vigil"
+                    android:text=""
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -73,13 +81,14 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
+                app:boxBackgroundColor="#FFFFFF"
                 android:hint="Telefono">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:id="@+id/tfTelefono"
-                    android:text="9485747373"
+                    android:text=""
                     android:layout_height="wrap_content"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -87,14 +96,15 @@
             <com.google.android.material.textfield.TextInputLayout
 
                 android:layout_width="match_parent"
+                app:boxBackgroundColor="#FFFFFF"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:hint="Celular">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:id="@+id/tfCelular"
-                    android:text="92848373"
+                    android:text=""
                     android:layout_height="wrap_content"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -103,13 +113,14 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                app:boxBackgroundColor="#FFFFFF"
+                android:layout_marginTop="8dp"
                 android:hint="Email">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:id="@+id/tfEmail"
-                    android:text="clinicaTacna@gmail.com"
+                    android:text=""
                     android:layout_height="wrap_content"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -117,18 +128,18 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
+                app:boxBackgroundColor="#FFFFFF"
                 android:hint="Especialidad">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
+                    android:id="@+id/tfEspecialidad"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tfEspecialidad"
-                    android:text="Cardiologoia"
-
+                    android:inputType="none"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -136,13 +147,14 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                app:boxBackgroundColor="#FFFFFF"
+                android:layout_marginTop="8dp"
                 android:hint="Precio Consulta">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:id="@+id/tfPrecioConsulta"
-                    android:text="80.00"
+                    android:text=""
                     android:layout_height="wrap_content"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -151,8 +163,9 @@
             <com.google.android.material.textfield.TextInputLayout
 
                 android:layout_width="match_parent"
+                app:boxBackgroundColor="#FFFFFF"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:hint="Servicio Ofrecidos">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -160,16 +173,16 @@
                     android:id="@+id/tfServiciosOfrecidos"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
-                    android:text="consulta Medica, Radiografia, Mamografia"
+                    android:text=""
 
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <Button
-                android:id="@+id/containedButton"
+                android:id="@+id/btnActualizarConsultorio"
                 android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:layout_height="wrap_content"
                 android:text="GUARDAR"
                 />

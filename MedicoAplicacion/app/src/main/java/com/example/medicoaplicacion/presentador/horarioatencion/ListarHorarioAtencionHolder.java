@@ -10,9 +10,12 @@ import com.example.medicoaplicacion.R;
 
 public class ListarHorarioAtencionHolder extends RecyclerView.ViewHolder {
 
-    TextView tvNameHorarioAtencion;
+    TextView tv_dia_horarioatencion_row,tv_horainicio_horarioatencion_row,tv_horafin_horarioatencion_row,tv_estado_horarioatencion_row;
     public ListarHorarioAtencionHolder(@NonNull View itemView) {
         super(itemView);
-        tvNameHorarioAtencion = itemView.findViewById(R.id.name_horario_atencion_row);
+        tv_dia_horarioatencion_row = itemView.findViewById(R.id.tv_dia_horarioatencion_row);
+        tv_horainicio_horarioatencion_row = itemView.findViewById(R.id.tv_horainicio_horarioatencion_row);
+        tv_horafin_horarioatencion_row = itemView.findViewById(R.id.tv_horafin_horarioatencion_row);
+        tv_estado_horarioatencion_row = itemView.findViewById(R.id.tv_estado_horarioatencion_row);
     }
 }

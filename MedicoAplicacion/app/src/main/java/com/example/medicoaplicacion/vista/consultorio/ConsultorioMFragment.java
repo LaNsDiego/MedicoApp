@@ -7,8 +7,21 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.medicoaplicacion.R;
+import com.example.medicoaplicacion.interfaces.ConsultorioInterface;
+import com.example.medicoaplicacion.modelo.ConsultorioModelo;
+import com.example.medicoaplicacion.modelo.EspecialidadModelo;
+import com.example.medicoaplicacion.modelo.SaveSharedPreference;
+import com.example.medicoaplicacion.presentador.consultorio.VerConsultorioPresentador;
+import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -16,16 +29,15 @@ import com.example.medicoaplicacion.R;
  * Use the {@link ConsultorioMFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ConsultorioMFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class ConsultorioMFragment extends Fragment implements ConsultorioInterface.VistaConsultorio {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
+    TextInputEditText tfnombre,tfDireccion,tfReferencia,tfTelefono,tfCelular,tfEmail,tfPrecioConsulta,tfServiciosOfrecidos;
+    Button btnActualizarConsultorio;
+    AutoCompleteTextView tfEspecialidad;
+
+    ConsultorioInterface.Presentador consultorioPresentador;
+    EspecialidadModelo especialidadModelo;
     public ConsultorioMFragment() {
         // Required empty public constructor
     }
@@ -42,8 +54,7 @@ public class ConsultorioMFragment extends Fragment {
     public static ConsultorioMFragment newInstance(String param1, String param2) {
         ConsultorioMFragment fragment = new ConsultorioMFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -52,8 +63,7 @@ public class ConsultorioMFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -61,6 +71,94 @@ public class ConsultorioMFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_consultorio_m, container, false);
+        View vista = inflater.inflate(R.layout.fragment_consultorio_m, container, false);
+
+        consultorioPresentador = new VerConsultorioPresentador(this);
+        especialidadModelo = new EspecialidadModelo();
+
+        tfnombre = vista.findViewById(R.id.tfnombre);
+        tfDireccion = vista.findViewById(R.id.tfDireccion);
+        tfReferencia = vista.findViewById(R.id.tfReferencia);
+        tfTelefono = vista.findViewById(R.id.tfTelefono);
+        tfCelular = vista.findViewById(R.id.tfCelular);
+        tfEmail = vista.findViewById(R.id.tfEmail);
+        tfPrecioConsulta = vista.findViewById(R.id.tfPrecioConsulta);
+        tfServiciosOfrecidos = vista.findViewById(R.id.tfServiciosOfrecidos);
+        tfEspecialidad = vista.findViewById(R.id.tfEspecialidad);
+        btnActualizarConsultorio = vista.findViewById(R.id.btnActualizarConsultorio);
+
+        btnActualizarConsultorio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actualizarConsultorio();
+            }
+        });
+        menejadorVerConsultorio();
+
+        String[] especialidad = new String[] {"Cardiologo", "Radiologo" , "Medicio General"};
+
+        ArrayAdapter<String> adapterEspecialidad =
+                new ArrayAdapter<>(requireContext(),
+                        R.layout.list_item,
+                        especialidad);
+        AutoCompleteTextView editTextFilledExposedDropdownEspecialidad = vista.findViewById(R.id.tfEspecialidad);
+        editTextFilledExposedDropdownEspecialidad.setAdapter(adapterEspecialidad);
+
+
+
+
+
+
+        return vista;
+    }
+
+    @Override
+    public void menejadorVerConsultorio() {
+        String idUsuario = SaveSharedPreference.getLoggedToken(getContext());
+        consultorioPresentador.ejecutarVerConsultorio(idUsuario);
+    }
+
+    @Override
+    public void manejadorVerConsultorioExitoso(ConsultorioModelo objConsultorio) {
+
+        tfnombre.setText(objConsultorio.getNombre());
+        tfDireccion.setText(objConsultorio.getDireccion());
+        tfReferencia.setText(objConsultorio.getReferencia());
+        tfTelefono.setText(objConsultorio.getTelefono());
+        tfCelular.setText(objConsultorio.getCelular());
+        tfEmail.setText(objConsultorio.getEmail());
+        tfPrecioConsulta.setText(String.valueOf(objConsultorio.getPrecioConsulta()));
+        tfServiciosOfrecidos.setText(objConsultorio.getServiciosOfresidos());
+        //Toast.makeText(getContext(), "Exitoso. "+objConsultorio.getNombre(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void actualizarConsultorio() {
+
+        String id_consultorio = SaveSharedPreference.getLoggedToken(getContext());
+        ConsultorioModelo consultorioModelo = new ConsultorioModelo();
+        consultorioModelo.setIdConsultorio(id_consultorio);
+        consultorioModelo.setNombre(tfnombre.getText().toString());
+        consultorioModelo.setDireccion(tfDireccion.getText().toString());
+        consultorioModelo.setReferencia(tfReferencia.getText().toString());
+        consultorioModelo.setTelefono(tfTelefono.getText().toString());
+        consultorioModelo.setCelular(tfCelular.getText().toString());
+        consultorioModelo.setEmail(tfEmail.getText().toString());
+        //consultorioModelo.setPrecioConsulta(Double.parseDouble(String.valueOf(tfPrecioConsulta.getText())));
+        consultorioModelo.setServiciosOfresidos(tfServiciosOfrecidos.getText().toString());
+
+        consultorioPresentador.ejecutarActualizarConsultorio(consultorioModelo);
+
+
+    }
+
+    @Override
+    public void manejadorActualizarConsultorioExitoso(ConsultorioModelo objConsultorio) {
+        Toast.makeText(getContext(), "Se ha actualizado exitosamente los datos.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void manejadorActualizarConsultorioFallido() {
+        Toast.makeText(getContext(), "A ocurrido un error.", Toast.LENGTH_SHORT).show();
     }
 }

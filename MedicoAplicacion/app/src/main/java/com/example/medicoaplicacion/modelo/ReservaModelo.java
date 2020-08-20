@@ -7,6 +7,7 @@ import com.example.medicoaplicacion.interfaces.HomeInterface;
 import com.example.medicoaplicacion.interfaces.ReservaMInterface;
 import com.example.medicoaplicacion.presentador.Home.HomePresentador;
 import com.example.medicoaplicacion.presentador.reserva.ReservaMPresentador;
+import com.google.firebase.firestore.DocumentReference;
 
 
 import java.util.ArrayList;
@@ -17,7 +18,8 @@ public class ReservaModelo implements ReservaMInterface.Modelo, HomeInterface.Mo
 
     private String idReserva;
     private String idAtencion;
-    private String idUsuario;
+    private String idConsultorio;
+    private String nombreMedica;
     private String precioConsulta;
     private String estado;
 
@@ -25,6 +27,7 @@ public class ReservaModelo implements ReservaMInterface.Modelo, HomeInterface.Mo
     private String fechaAtencion;
     private String nombreUsuario;
     private String turnoAtencion;
+
 
     private Map<String,Object> datosExtra;
     //private List<AtencionModelo> atencion;
@@ -63,14 +66,6 @@ public class ReservaModelo implements ReservaMInterface.Modelo, HomeInterface.Mo
 
     public void setIdAtencion(String idAtencion) {
         this.idAtencion = idAtencion;
-    }
-
-    public String getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(String idUsuario) {
-        this.idUsuario = idUsuario;
     }
 
     public String getPrecioConsulta() {
@@ -166,11 +161,14 @@ public class ReservaModelo implements ReservaMInterface.Modelo, HomeInterface.Mo
 
         reservaMPresentador.cuandoListaReservaExitoso(lista);
 
-
     }
 
     @Override
     public void listarReservaHome() {
+
+        //Conexion.getCollectionReserva().whereEqualTo("estado","P");
+
+
         ReservaModelo reservaModelo1 = new ReservaModelo();
         ReservaModelo reservaModelo2 = new ReservaModelo();
         ReservaModelo reservaModelo3 = new ReservaModelo();
