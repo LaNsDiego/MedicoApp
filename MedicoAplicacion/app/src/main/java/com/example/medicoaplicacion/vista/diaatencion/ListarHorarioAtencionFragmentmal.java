@@ -69,7 +69,7 @@ public class ListarHorarioAtencionFragmentmal extends Fragment implements Horari
 
     @Override
     public void menejadorListarHorarioAtencion() {
-        presentador.ejecutarListarHorarioAtencion();
+        presentador.ejecutarListarHorarioAtencion("2");
     }
 
     @Override

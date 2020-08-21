@@ -16,7 +16,7 @@ public interface HorarioAtencionListarInterface {
 
     interface Presentador{
 
-        void ejecutarListarHorarioAtencion(); /// general el arraylist  2
+        void ejecutarListarHorarioAtencion(String idConsultorio); /// general el arraylist  2
         void cuandoListaHorarioAtencionExitoso(List<HorarioAtencionModelo> list); // 4.1
 
     }

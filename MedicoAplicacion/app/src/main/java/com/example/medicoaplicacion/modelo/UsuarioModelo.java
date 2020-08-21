@@ -337,24 +337,24 @@ public class UsuarioModelo implements UsuarioInterface.Modelo, PerfilInterface.M
     public void actualizarPerfil(final UsuarioModelo objUsuario) {
 
         Conexion.getCollectionUsuario().document(objUsuario.getIdUsuario())
-                .update(
-                        "tipoDocumento",objUsuario.getTipoDocumento(),
-                        "nroDocumento",objUsuario.getNroDocumento(),
-                        "nombres",objUsuario.getNombres(),
-                        "email",objUsuario.getEmail(),
-                        "celular",objUsuario.getCelular(),
-                        "fechaNacimiento",objUsuario.getFechaNacimiento(),
-                        "especialidad",objUsuario.getEspecialidad(),
-                        "colegiatura",objUsuario.getColegiatura(),
-                        "biografia",objUsuario.getBiografia()
-                ).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()){
-                    presentadorperfil.cuandoActualizarPerfilExitoso(objUsuario);
-                }else{
-                    presentadorperfil.cuandoActualizarPerfilFallido();
-                }
+                        .update(
+                                "tipoDocumento",objUsuario.getTipoDocumento(),
+                                "nroDocumento",objUsuario.getNroDocumento(),
+                                "nombres",objUsuario.getNombres(),
+                                "email",objUsuario.getEmail(),
+                                "celular",objUsuario.getCelular(),
+                                "fechaNacimiento",objUsuario.getFechaNacimiento(),
+                                "especialidad",objUsuario.getEspecialidad(),
+                                "colegiatura",objUsuario.getColegiatura(),
+                                "biografia",objUsuario.getBiografia()
+                        ).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    presentadorperfil.cuandoActualizarPerfilExitoso(objUsuario);
+                                }else{
+                                    presentadorperfil.cuandoActualizarPerfilFallido();
+                                }
             }
         });
 

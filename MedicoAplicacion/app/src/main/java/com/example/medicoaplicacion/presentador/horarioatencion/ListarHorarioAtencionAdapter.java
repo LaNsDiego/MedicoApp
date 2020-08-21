@@ -39,6 +39,12 @@ public class ListarHorarioAtencionAdapter extends RecyclerView.Adapter<ListarHor
         holder.tv_horainicio_horarioatencion_row.setText(diaAtencionModelo.getHoraInicio());
         holder.tv_horafin_horarioatencion_row.setText(diaAtencionModelo.getHoraFin());
         holder.tv_estado_horarioatencion_row.setText(diaAtencionModelo.getEstado());
+        holder.card_container_horarioatencion_row.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eventosClick.onClickHorarioAtencionRow(diaAtencionModelo.getIdHorarioAtencion());
+            }
+        });
 
     }
 

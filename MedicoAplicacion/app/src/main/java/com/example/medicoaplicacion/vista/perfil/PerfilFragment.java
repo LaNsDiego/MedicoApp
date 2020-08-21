@@ -92,7 +92,7 @@ public class PerfilFragment extends Fragment implements PerfilInterface.VistaPer
         AutoCompleteTextView editTextFilledExposedDropdownTipoDocumento = vista.findViewById(R.id.tfTipoDocumento);
         editTextFilledExposedDropdownTipoDocumento.setAdapter(adapterTipoDocumento);
 
-        String[] especialidad = new String[] {"Cardiologo", "Radiologo" , "Medicio General"};
+        String[] especialidad = new String[] {"Anesteciología", "Ginecobstetra" , "Pediatría","Odontologia","Psiquiatría","Dermatología","Neurología"};
         ArrayAdapter<String> adapterEspecialidad =
                 new ArrayAdapter<>(requireContext(),
                         R.layout.list_item,

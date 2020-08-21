@@ -18,8 +18,8 @@ public class ListarHorarioAtencionPresentador implements HorarioAtencionListarIn
 
 
     @Override
-    public void ejecutarListarHorarioAtencion() {
-        horarioAtencionModelo.listarHorarioAtencion("1");
+    public void ejecutarListarHorarioAtencion(String idConsultorio) {
+        horarioAtencionModelo.listarHorarioAtencion(idConsultorio);
     }
 
     @Override

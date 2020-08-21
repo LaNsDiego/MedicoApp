@@ -1,33 +1,40 @@
 package com.example.medicoaplicacion.presentador.horarioatencion;
 
-import com.example.medicoaplicacion.interfaces.HorarioAtencionAgregarInterface;
+import com.example.medicoaplicacion.interfaces.HorarioAtencionInterface;
 import com.example.medicoaplicacion.modelo.HorarioAtencionModelo;
 
-public class AgregarHorarioAtencionPresentador implements HorarioAtencionAgregarInterface.Presentador {
+public class AgregarHorarioAtencionPresentador implements HorarioAtencionInterface.Presentador {
 
-    HorarioAtencionAgregarInterface.Modelo horarioAtencionModelo;
-    HorarioAtencionAgregarInterface.VistaAgregar vistaAgregar;
+    HorarioAtencionInterface.Modelo horarioAtencionModelo;
+    HorarioAtencionInterface.VistaAgregar vistaAgregar;
+
+    HorarioAtencionInterface.VistaEditar vistaEditar;
 
 
-    public AgregarHorarioAtencionPresentador(HorarioAtencionAgregarInterface.VistaAgregar vistaAgregar) {
+    public AgregarHorarioAtencionPresentador(HorarioAtencionInterface.VistaAgregar vistaAgregar) {
         this.vistaAgregar = vistaAgregar;
         this.horarioAtencionModelo = new HorarioAtencionModelo(this);
     }
 
-    @Override
-    public void ejecutarAgregarHorarioAtencion(HorarioAtencionModelo horarioAtencionModelo) {
+    public AgregarHorarioAtencionPresentador(HorarioAtencionInterface.VistaEditar vistaEditar) {
+        this.vistaEditar = vistaEditar;
+        this.horarioAtencionModelo = new HorarioAtencionModelo(this);
+    }
 
-        switch (horarioAtencionModelo.getDia()){
-            case "Lunes": horarioAtencionModelo.setNroDia("1"); break;
-            case "Martes": horarioAtencionModelo.setNroDia("2"); break;
-            case "Miercoles": horarioAtencionModelo.setNroDia("3"); break;
-            case "Jueves": horarioAtencionModelo.setNroDia("4"); break;
-            case "Viernes": horarioAtencionModelo.setNroDia("5"); break;
-            case "Sabado": horarioAtencionModelo.setNroDia("6"); break;
-            case "Domingo": horarioAtencionModelo.setNroDia("7"); break;
+    @Override
+    public void ejecutarAgregarHorarioAtencion(HorarioAtencionModelo objhorario) {
+
+        switch (objhorario.getDia()){
+            case "Lunes": objhorario.setNroDia("1"); break;
+            case "Martes": objhorario.setNroDia("2"); break;
+            case "Miercoles": objhorario.setNroDia("3"); break;
+            case "Jueves": objhorario.setNroDia("4"); break;
+            case "Viernes": objhorario.setNroDia("5"); break;
+            case "Sabado": objhorario.setNroDia("6"); break;
+            case "Domingo": objhorario.setNroDia("7"); break;
         }
 
-        horarioAtencionModelo.agregarHorarioAtencion(horarioAtencionModelo);
+        horarioAtencionModelo.agregarHorarioAtencion(objhorario);
     }
 
     @Override
@@ -39,4 +46,48 @@ public class AgregarHorarioAtencionPresentador implements HorarioAtencionAgregar
     public void cuandoAgregarHorarioAtencionFallido() {
         vistaAgregar.manejadorAgregarHorarioAtencionFallido();
     }
+
+    @Override
+    public void ejecutarEditarHorarioAtencion(HorarioAtencionModelo horario) {
+
+        switch (horario.getDia()){
+            case "Lunes": horario.setNroDia("1"); break;
+            case "Martes": horario.setNroDia("2"); break;
+            case "Miercoles": horario.setNroDia("3"); break;
+            case "Jueves": horario.setNroDia("4"); break;
+            case "Viernes": horario.setNroDia("5"); break;
+            case "Sabado": horario.setNroDia("6"); break;
+            case "Domingo": horario.setNroDia("7"); break;
+        }
+        horarioAtencionModelo.editarHorarioAtencion(horario);
+
+    }
+
+    @Override
+    public void cuandoEditarHorarioAtencionExitoso(HorarioAtencionModelo horarioAtencionModelo) {
+        vistaEditar.manejadorEditarHorarioAtencionExitoso();
+    }
+
+    @Override
+    public void cuandoEditarHorarioAtencionFallido() {
+        vistaEditar.manejadorEditarHorarioAtencionFallido();
+    }
+
+    @Override
+    public void ejecutarVerHorarioAtencion(String idHorarioAtencion) {
+        horarioAtencionModelo.verHorarioAtencion(idHorarioAtencion);
+    }
+
+    @Override
+    public void cuandoVerHorarioAtencionExitoso(HorarioAtencionModelo horarioAtencionModelo) {
+        vistaEditar.manejadorVerHorarioAtencionExitoso(horarioAtencionModelo);
+    }
+
+    @Override
+    public void cuandoVerHorarioAtencionFallido() {
+        vistaEditar.manejadorVerHorarioAtencionFallido();
+    }
+
+
+
 }

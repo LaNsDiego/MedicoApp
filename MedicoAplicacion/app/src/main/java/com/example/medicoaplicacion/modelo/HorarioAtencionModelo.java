@@ -1,23 +1,21 @@
 package com.example.medicoaplicacion.modelo;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
-import com.example.medicoaplicacion.interfaces.HorarioAtencionAgregarInterface;
+import com.example.medicoaplicacion.interfaces.HorarioAtencionInterface;
 import com.example.medicoaplicacion.interfaces.HorarioAtencionListarInterface;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HorarioAtencionModelo implements HorarioAtencionListarInterface.Modelo, HorarioAtencionAgregarInterface.Modelo, Serializable {
+public class HorarioAtencionModelo implements HorarioAtencionListarInterface.Modelo, HorarioAtencionInterface.Modelo, Serializable {
 
 
     private String idHorarioAtencion;
@@ -30,15 +28,13 @@ public class HorarioAtencionModelo implements HorarioAtencionListarInterface.Mod
 
 
     HorarioAtencionListarInterface.Presentador presentadorListarHorarioAtencion;
-    HorarioAtencionAgregarInterface.Presentador presentadorAgregarHorarioAtencion;
+    HorarioAtencionInterface.Presentador presentadorAgregarHorarioAtencion;
 
 
 
-    public HorarioAtencionModelo() {
+    public HorarioAtencionModelo() { }
 
-    }
-
-    public HorarioAtencionModelo(HorarioAtencionAgregarInterface.Presentador presentadorAgregarHorarioAtencion) {
+    public HorarioAtencionModelo(HorarioAtencionInterface.Presentador presentadorAgregarHorarioAtencion) {
         this.presentadorAgregarHorarioAtencion = presentadorAgregarHorarioAtencion;
     }
 
@@ -104,9 +100,10 @@ public class HorarioAtencionModelo implements HorarioAtencionListarInterface.Mod
     }
 
     @Override
-    public void listarHorarioAtencion(String idDiaAtencion) {
+    public void listarHorarioAtencion(String idConsultorio) {
 
-        Conexion.getCollectionHorarioAtencion().orderBy("dia",Query.Direction.ASCENDING)
+        Conexion.getCollectionHorarioAtencion()
+                .whereEqualTo("idConsultorio",idConsultorio)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                      @Override
                      public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -114,7 +111,7 @@ public class HorarioAtencionModelo implements HorarioAtencionListarInterface.Mod
                          final List<HorarioAtencionModelo> listaHorario = new ArrayList<>();
                          for (DocumentSnapshot document : task.getResult().getDocuments()){
                              HorarioAtencionModelo horario = document.toObject(HorarioAtencionModelo.class);
-                             Log.d("LISTA",horario.getDia());
+                             //Log.d("LISTA",horario.getDia());
                              listaHorario.add(horario);
 
                          }
@@ -131,7 +128,10 @@ public class HorarioAtencionModelo implements HorarioAtencionListarInterface.Mod
     @Override
     public void agregarHorarioAtencion(final HorarioAtencionModelo objhorario) {
 
+
+
         final DocumentReference nuevo = Conexion.getCollectionHorarioAtencion().document();
+        objhorario.setIdHorarioAtencion(nuevo.getId());
         nuevo.set(objhorario).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -147,6 +147,51 @@ public class HorarioAtencionModelo implements HorarioAtencionListarInterface.Mod
             }
         });
 
+
+    }
+
+    @Override
+    public void editarHorarioAtencion(final HorarioAtencionModelo horarioAtencionModelo) {
+
+        Conexion.getCollectionHorarioAtencion().document(horarioAtencionModelo.getIdHorarioAtencion())
+                .update(
+                        "dia",horarioAtencionModelo.getDia(),
+                        "estado",horarioAtencionModelo.getEstado(),
+                        "horaFin",horarioAtencionModelo.getHoraFin(),
+                        "horaInicio",horarioAtencionModelo.getHoraInicio(),
+                        "nroDia",horarioAtencionModelo.getNroDia()
+                ).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    presentadorAgregarHorarioAtencion.cuandoEditarHorarioAtencionExitoso(horarioAtencionModelo);
+                }else{
+                    presentadorAgregarHorarioAtencion.cuandoEditarHorarioAtencionFallido();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void verHorarioAtencion(String  idHorarioAtencion) {
+
+        Conexion.getCollectionHorarioAtencion().document(idHorarioAtencion)
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if(documentSnapshot.exists()){
+                                final HorarioAtencionModelo horarioAtencionModelo = documentSnapshot.toObject(HorarioAtencionModelo.class);
+                                if(horarioAtencionModelo != null){
+                                    presentadorAgregarHorarioAtencion.cuandoVerHorarioAtencionExitoso(horarioAtencionModelo);
+                                }
+
+                            }else{
+                                presentadorAgregarHorarioAtencion.cuandoVerHorarioAtencionFallido();
+                            }
+                        }
+                    }
+
+        );
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.medicoaplicacion.vista.horarioatencion;
 
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,16 +11,17 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.medicoaplicacion.R;
-import com.example.medicoaplicacion.interfaces.HorarioAtencionAgregarInterface;
-import com.example.medicoaplicacion.interfaces.HorarioAtencionListarInterface;
+import com.example.medicoaplicacion.interfaces.HorarioAtencionInterface;
 import com.example.medicoaplicacion.modelo.HorarioAtencionModelo;
 import com.example.medicoaplicacion.modelo.SaveSharedPreference;
 import com.example.medicoaplicacion.presentador.horarioatencion.AgregarHorarioAtencionPresentador;
-import com.example.medicoaplicacion.presentador.horarioatencion.ListarHorarioAtencionPresentador;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.Calendar;
 
 
 /**
@@ -27,12 +29,14 @@ import com.google.android.material.textfield.TextInputEditText;
  * Use the {@link AgregarHorarioAtencionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AgregarHorarioAtencionFragment extends Fragment implements HorarioAtencionAgregarInterface.VistaAgregar {
+public class AgregarHorarioAtencionFragment extends Fragment implements HorarioAtencionInterface.VistaAgregar {
 
-    HorarioAtencionAgregarInterface.Presentador presentador;
+    HorarioAtencionInterface.Presentador presentador;
     TextInputEditText tfHoraInicio,tfHoraFinal;
-    AutoCompleteTextView tfDia, tfEstado;
+    AutoCompleteTextView tfDia, tfEstado,editTextFilledExposedDropdowndia;
     Button btnAgregar;
+
+
 
     public AgregarHorarioAtencionFragment() {
         // Required empty public constructor
@@ -76,14 +80,26 @@ public class AgregarHorarioAtencionFragment extends Fragment implements HorarioA
             }
         });
 
+        tfHoraInicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                obtenerHoraInicio();
+            }
+        });
+        tfHoraFinal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                obtenerHoraFin();
+            }
+        });
+
         String[] dia = new String[] {"Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"};
         ArrayAdapter<String> adapterdia =
                 new ArrayAdapter<>(requireContext(),
                         R.layout.list_item,
                         dia);
-        AutoCompleteTextView editTextFilledExposedDropdowndia = vista.findViewById(R.id.tfDia);
+        editTextFilledExposedDropdowndia = vista.findViewById(R.id.tfDia);
         editTextFilledExposedDropdowndia.setAdapter(adapterdia);
-
 
 
         String[] estado = new String[] {"Activo", "Inactivo"};
@@ -99,6 +115,114 @@ public class AgregarHorarioAtencionFragment extends Fragment implements HorarioA
         return vista;
     }
 
+    private void obtenerHoraInicio(){
+
+       Calendar calendar = Calendar.getInstance();
+       int HOUR = calendar.get(Calendar.HOUR);
+       int MINUTE = calendar.get(Calendar.MINUTE);
+       final String CERO = "0";
+       final String DOS_PUNTOS = ":";
+        //boolean is24HourFormat = DateFormat.(this);
+        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                String HoraInicio = "";
+                String AMPM = "AM";
+                if (hourOfDay > 12 ){
+                    AMPM = "PM";
+                }
+                HoraInicio = FormarHora(hourOfDay)+":"+FormarMinuto(minute)+" "+AMPM;
+                tfHoraInicio.setText(HoraInicio);
+
+
+            }
+        }, HOUR, MINUTE, false);
+        timePickerDialog.show();
+
+    }
+
+    private void obtenerHoraFin(){
+
+        Calendar calendar = Calendar.getInstance();
+        int HOUR = calendar.get(Calendar.HOUR);
+        int MINUTE = calendar.get(Calendar.MINUTE);
+        final String CERO = "0";
+        final String DOS_PUNTOS = ":";
+        //boolean is24HourFormat = DateFormat.(this);
+        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                String HoraInicio = "";
+                String AMPM = "AM";
+                if (hourOfDay > 12 ){
+                    AMPM = "PM";
+                }
+                HoraInicio = FormarHora(hourOfDay)+":"+FormarMinuto(minute)+" "+AMPM;
+                tfHoraFinal.setText(HoraInicio);
+
+
+            }
+        }, HOUR, MINUTE, false);
+        timePickerDialog.show();
+
+    }
+
+
+
+    public String FormarHora(int hourOfDay){
+        String horaString = "";
+        switch (hourOfDay){
+
+            case 1 : horaString = "01";  break;
+            case 2 : horaString = "02";  break;
+            case 3 : horaString = "03";  break;
+            case 4 : horaString = "04";  break;
+            case 5 : horaString = "05";  break;
+            case 6 : horaString = "06";  break;
+            case 7 : horaString = "07";  break;
+            case 8 : horaString = "08";  break;
+            case 9 : horaString = "09";  break;
+            case 10 : horaString = "10";  break;
+            case 11 : horaString = "11";  break;
+            case 12 : horaString = "12";  break;
+            case 13 : horaString = "01";  break;
+            case 14 : horaString = "02";  break;
+            case 15 : horaString = "03";  break;
+            case 16 : horaString = "04";  break;
+            case 17 : horaString = "05";  break;
+            case 18 : horaString = "06";  break;
+            case 19 : horaString = "07";  break;
+            case 20 : horaString = "08";  break;
+            case 21 : horaString = "09";  break;
+            case 22 : horaString = "10";  break;
+            case 23 : horaString = "11";  break;
+            case 24 : horaString = "12";  break;
+
+        }
+
+        return horaString;
+    }
+
+    public String FormarMinuto(int minute){
+
+        String minuteString = "";
+        switch (minute){
+            case 0 : minuteString = "00";  break;
+            case 1 : minuteString = "01";  break;
+            case 2 : minuteString = "02";  break;
+            case 3 : minuteString = "03";  break;
+            case 4 : minuteString = "04";  break;
+            case 5 : minuteString = "05";  break;
+            case 6 : minuteString = "06";  break;
+            case 7 : minuteString = "07";  break;
+            case 8 : minuteString = "08";  break;
+            case 9 : minuteString = "09";  break;
+            default: minuteString = String.valueOf(minute); break;
+
+        }
+
+        return minuteString;
+    }
     @Override
     public void menejadorAgregarHorarioAtencion() {
 
@@ -139,6 +263,10 @@ public class AgregarHorarioAtencionFragment extends Fragment implements HorarioA
 
     @Override
     public void manejadorAgregarHorarioAtencionExitoso() {
+
+
+        tfHoraInicio.setText("");
+        tfHoraFinal.setText("");
         Toast.makeText(getContext(), "Se ha Agregado el nuevo horario de atención", Toast.LENGTH_SHORT).show();
     }
 

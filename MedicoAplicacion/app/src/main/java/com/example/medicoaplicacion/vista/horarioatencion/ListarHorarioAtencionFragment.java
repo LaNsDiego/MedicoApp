@@ -11,13 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.medicoaplicacion.R;
 import com.example.medicoaplicacion.interfaces.HorarioAtencionListarInterface;
 import com.example.medicoaplicacion.modelo.HorarioAtencionModelo;
+import com.example.medicoaplicacion.modelo.SaveSharedPreference;
 import com.example.medicoaplicacion.presentador.horarioatencion.ListarHorarioAtencionAdapter;
 import com.example.medicoaplicacion.presentador.horarioatencion.ListarHorarioAtencionPresentador;
-import com.example.medicoaplicacion.vista.diaatencion.ListarHorarioAtencionFragmentmal;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -84,7 +85,8 @@ public class ListarHorarioAtencionFragment extends Fragment implements HorarioAt
 
     @Override
     public void menejadorListarHorarioAtencion() {
-        presentador.ejecutarListarHorarioAtencion();
+        String id_consultorio = SaveSharedPreference.getLoggedToken(getContext());
+        presentador.ejecutarListarHorarioAtencion(id_consultorio);
     }
 
     @Override
@@ -109,11 +111,22 @@ public class ListarHorarioAtencionFragment extends Fragment implements HorarioAt
     @Override
     public void onClickHorarioAtencionRow(String idHorarioAtencion) {
 
-        ListarHorarioAtencionFragmentmal nuevoFragmento = new ListarHorarioAtencionFragmentmal();
+        Bundle datosAEnviar = new Bundle();
+
+        datosAEnviar.putString("idHorarioAtencion", idHorarioAtencion);
+
+        EditarHorarioAtencionFragment nuevoFragmento = new EditarHorarioAtencionFragment();
+        nuevoFragmento.setArguments(datosAEnviar);
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.container_new_horario_atencion, nuevoFragmento);
         transaction.addToBackStack(null);
         transaction.commit();
+
+
+
+
+
+
 
     }
 }
