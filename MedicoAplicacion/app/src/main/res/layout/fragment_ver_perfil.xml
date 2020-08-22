@@ -21,6 +21,27 @@
             android:paddingRight="30dp"
             >
 
+            <ImageView
+                android:id="@+id/imageMedico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/medico" />
+
+            <Button
+                android:id="@+id/btnSubirFoto"
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content"
+                android:text="SUBIR FOTO"
+                />
+            <Button
+                android:id="@+id/btnSeleccionarFoto"
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content"
+                android:text="SELECCIONAR"
+                />
+
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
@@ -179,6 +200,8 @@
                 android:layout_height="wrap_content"
                 android:text="GUARDAR"
                 />
+
+
 
         </LinearLayout>
     </ScrollView>

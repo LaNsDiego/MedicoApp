@@ -1,9 +1,16 @@
 package com.example.medicoaplicacion.vista.perfil;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,9 +27,23 @@ import com.example.medicoaplicacion.interfaces.PerfilInterface;
 import com.example.medicoaplicacion.modelo.SaveSharedPreference;
 import com.example.medicoaplicacion.modelo.UsuarioModelo;
 import com.example.medicoaplicacion.presentador.perfil.VerPerfilPresentador;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.theartofdev.edmodo.cropper.CropImage;;
+import java.io.File;
+import java.util.Random;
+
+import static android.app.Activity.RESULT_OK;
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 /**
@@ -33,9 +55,19 @@ public class PerfilFragment extends Fragment implements PerfilInterface.VistaPer
 
     TextInputEditText tfNroDocumento,tfNombresApellidos,tfEmail,tfCelular,tfFechaNacimiento,tfNroColegiatura,tfBiografia;
     AutoCompleteTextView tfTipoDocumento, tfEspecialidad;
-    Button btnActualizarPerfil;
+    Button btnActualizarPerfil,btnSubirFoto, btnSeleccionarFoto;
+
+
+    ImageView imageMedico;
     UsuarioModelo usuarioModelo;
     PerfilInterface.Presentador presentador;
+
+    private static final int GALLERY_INTENT = 1;
+    private static final String PATH_IMAGES = "images";
+    StorageReference storageReference;
+    private static final int PICK_IMAGE = 100;
+    Uri imageUri;
+    private StorageReference mStorageRef;
 
     public PerfilFragment() {
         // Required empty public constructor
@@ -72,7 +104,12 @@ public class PerfilFragment extends Fragment implements PerfilInterface.VistaPer
         tfTipoDocumento = vista.findViewById(R.id.tfTipoDocumento);
         tfEspecialidad = vista.findViewById(R.id.tfEspecialidad);
 
+        imageMedico = vista.findViewById(R.id.imageMedico);
         btnActualizarPerfil = vista.findViewById(R.id.btnActualizarPerfil);
+        btnSubirFoto = vista.findViewById(R.id.btnSubirFoto);
+
+        //mStorageRef = FirebaseStorage.getInstance().getReference();
+
 
         btnActualizarPerfil.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -80,9 +117,18 @@ public class PerfilFragment extends Fragment implements PerfilInterface.VistaPer
                actualizarPerfil();
            }
         });
+        btnSubirFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent,GALLERY_INTENT);
+            }
+        });
+
+
 
         menejadorVerPerfil();
-
 
         String[] tipoDocumento = new String[] {"DNI", "RUC", "PASAPORTE"};
         ArrayAdapter<String> adapterTipoDocumento =
@@ -114,6 +160,65 @@ public class PerfilFragment extends Fragment implements PerfilInterface.VistaPer
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GALLERY_INTENT && resultCode == RESULT_OK) {
+            if (data != null) {
+
+                final Uri localUri = data.getData();
+                Log.d(TAG, "Uri: " + localUri.toString());
+                storageReference = FirebaseStorage.getInstance().getReference(String.valueOf(new Random().nextInt()));
+                UploadTask uploadTask = storageReference.putFile(localUri);
+                putImageInStorage(storageReference,uploadTask);
+
+
+
+            }
+        }
+
+    }
+
+
+    private void putImageInStorage(final StorageReference storageReference,final UploadTask uploadTask) {
+
+
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+                // Continue with the task to get the download URL
+                Log.d(TAG,storageReference.getDownloadUrl().toString());
+                return storageReference.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                    Log.w("IMAGENEXISOTSO", downloadUri.toString());
+                    /*
+                    MessageModel newMessagePhoto = new MessageModel();
+                    newMessagePhoto.setTypeMessage(MessageModel.TYPE_PHOTO);
+                    newMessagePhoto.setContent(downloadUri.toString());
+                    newMessagePhoto.setUserEmiterId(RealUserIdEmitter);
+                    newMessagePhoto.setUserReceptorId(RealUserIdReceptor);
+                    presenterMessage.doCreateMessageByConversationId(currentConversation.getId(),newMessagePhoto);
+                    */
+
+                    if (task.isSuccessful()) {
+
+                    } else {
+                        Log.w(TAG, "Image upload task was not successful.",
+                                task.getException());
+                    }
+                }
+            }
+        });
+    }
     @Override
     public void manejadorVerPerfilExitoso(UsuarioModelo objUsuario) {
 
@@ -155,5 +260,11 @@ public class PerfilFragment extends Fragment implements PerfilInterface.VistaPer
     @Override
     public void manejadorActualizarPerfilFallido() {
         Toast.makeText(getContext(), "A ocurrido un error.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void SubirPerfil() {
+
+
     }
 }
