@@ -34,6 +34,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.Random;
 
@@ -50,7 +51,8 @@ public class PerfilFragment extends Fragment implements PerfilInterface.VistaPer
 
     TextInputEditText tfNroDocumento,tfNombresApellidos,tfEmail,tfCelular,tfFechaNacimiento,tfNroColegiatura,tfBiografia;
     AutoCompleteTextView tfTipoDocumento, tfEspecialidad;
-    Button btnActualizarPerfil,btnSubirFoto, btnSeleccionarFoto;
+    Button btnActualizarPerfil,btnSubirFoto;
+    TextView tvNombreMedico;
 
 
     ImageView imageMedico;
@@ -99,11 +101,11 @@ public class PerfilFragment extends Fragment implements PerfilInterface.VistaPer
         tfTipoDocumento = vista.findViewById(R.id.tfTipoDocumento);
         tfEspecialidad = vista.findViewById(R.id.tfEspecialidad);
 
+        tvNombreMedico = vista.findViewById(R.id.tvNombreMedico);
         imageMedico = vista.findViewById(R.id.imageMedico);
         btnActualizarPerfil = vista.findViewById(R.id.btnActualizarPerfil);
         btnSubirFoto = vista.findViewById(R.id.btnSubirFoto);
 
-        btnActualizarPerfil = vista.findViewById(R.id.btnActualizarPerfil);
 
         btnActualizarPerfil.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -190,14 +192,10 @@ public class PerfilFragment extends Fragment implements PerfilInterface.VistaPer
                 if (task.isSuccessful()) {
                     Uri downloadUri = task.getResult();
                     Log.w("IMAGENEXISOTSO", downloadUri.toString());
-                    /*
-                    MessageModel newMessagePhoto = new MessageModel();
-                    newMessagePhoto.setTypeMessage(MessageModel.TYPE_PHOTO);
-                    newMessagePhoto.setContent(downloadUri.toString());
-                    newMessagePhoto.setUserEmiterId(RealUserIdEmitter);
-                    newMessagePhoto.setUserReceptorId(RealUserIdReceptor);
-                    presenterMessage.doCreateMessageByConversationId(currentConversation.getId(),newMessagePhoto);
-                    */
+
+                    UsuarioModelo user = new UsuarioModelo();
+                    user.setAvatar(downloadUri.toString());
+                    actualizarFoto(user);
 
                     if (task.isSuccessful()) {
 
@@ -212,6 +210,8 @@ public class PerfilFragment extends Fragment implements PerfilInterface.VistaPer
     @Override
     public void manejadorVerPerfilExitoso(UsuarioModelo objUsuario) {
 
+        Picasso.get().load(objUsuario.getAvatar()).resize(230, 230).centerCrop().into(imageMedico);
+        tvNombreMedico.setText(objUsuario.getNombres());
         tfTipoDocumento.setText(objUsuario.getTipoDocumento());
         tfNroDocumento.setText(objUsuario.getNroDocumento());
         tfNombresApellidos.setText(objUsuario.getNombres());
@@ -244,11 +244,30 @@ public class PerfilFragment extends Fragment implements PerfilInterface.VistaPer
 
     @Override
     public void manejadorActualizarPerfilExitoso(UsuarioModelo objUsuario) {
+        tvNombreMedico.setText(objUsuario.getNombres());
         Toast.makeText(getContext(), "Se ha actualizado exitosamente los datos.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void manejadorActualizarPerfilFallido() {
         Toast.makeText(getContext(), "A ocurrido un error.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void actualizarFoto(UsuarioModelo usuarioModelo) {
+        String idUsuario = SaveSharedPreference.getLoggedToken(getContext());
+        usuarioModelo.setIdUsuario(idUsuario);
+        presentador.ejecutarActualizarFoto(usuarioModelo);
+    }
+
+    @Override
+    public void manejadorActualizarFotoExitoso(UsuarioModelo objUsuario) {
+        menejadorVerPerfil();
+        Toast.makeText(getContext(), "Se ha Actualizado la foto.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void manejadorActualizarFotoFallido() {
+        Toast.makeText(getContext(), "A Ocurrido un error.", Toast.LENGTH_SHORT).show();
     }
 }

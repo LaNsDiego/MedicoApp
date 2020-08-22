@@ -361,6 +361,23 @@ public class UsuarioModelo implements UsuarioInterface.Modelo, PerfilInterface.M
     }
 
     @Override
+    public void actualizarFoto(final UsuarioModelo objUsuario) {
+        Conexion.getCollectionUsuario().document(objUsuario.getIdUsuario())
+                .update(
+                        "avatar",objUsuario.getAvatar()
+                ).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    presentadorperfil.cuandoActualizarFotoExitoso(objUsuario);
+                }else{
+                    presentadorperfil.cuandoActualizarFotoFallido();
+                }
+            }
+        });
+    }
+
+    @Override
     public void actualizarContrasena(UsuarioModelo objUsuario) {
         UsuarioModelo obj1 = objUsuario;
 

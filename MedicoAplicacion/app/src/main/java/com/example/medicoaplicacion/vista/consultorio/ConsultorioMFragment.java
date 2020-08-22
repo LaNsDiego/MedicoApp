@@ -1,28 +1,48 @@
 package com.example.medicoaplicacion.vista.consultorio;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.medicoaplicacion.R;
 import com.example.medicoaplicacion.interfaces.ConsultorioInterface;
 import com.example.medicoaplicacion.modelo.ConsultorioModelo;
 import com.example.medicoaplicacion.modelo.EspecialidadModelo;
 import com.example.medicoaplicacion.modelo.SaveSharedPreference;
+import com.example.medicoaplicacion.modelo.UsuarioModelo;
 import com.example.medicoaplicacion.presentador.consultorio.VerConsultorioPresentador;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import static android.app.Activity.RESULT_OK;
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 /**
@@ -34,13 +54,22 @@ public class ConsultorioMFragment extends Fragment implements ConsultorioInterfa
 
 
     TextInputEditText tfnombre,tfDireccion,tfReferencia,tfTelefono,tfCelular,tfEmail,tfPrecioConsulta,tfServiciosOfrecidos;
-    Button btnActualizarConsultorio;
+    Button btnActualizarConsultorio,btnSubirFoto;
     AutoCompleteTextView tfEspecialidad;
     public  static  Double latitud;
     public  static  Double Longitud;
     public  static  String Direccion;
     ConsultorioInterface.Presentador consultorioPresentador;
     EspecialidadModelo especialidadModelo;
+    ImageView imageConsultorio;
+    LinearLayout bgConsultorio;
+
+    private static final int GALLERY_INTENT = 1;
+    private static final String PATH_IMAGES = "images";
+    StorageReference storageReference;
+    private static final int PICK_IMAGE = 100;
+    Uri imageUri;
+    private StorageReference mStorageRef;
     public ConsultorioMFragment() {
         // Required empty public constructor
     }
@@ -89,10 +118,21 @@ public class ConsultorioMFragment extends Fragment implements ConsultorioInterfa
         tfServiciosOfrecidos = vista.findViewById(R.id.tfServiciosOfrecidos);
         tfEspecialidad = vista.findViewById(R.id.tfEspecialidad);
         btnActualizarConsultorio = vista.findViewById(R.id.btnActualizarConsultorio);
+        imageConsultorio = vista.findViewById(R.id.imageConsultorio);
         tfDireccion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mensaje();
+            }
+        });
+        btnSubirFoto = vista.findViewById(R.id.btnSubirFoto);
+
+        btnSubirFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent,GALLERY_INTENT);
             }
         });
         btnActualizarConsultorio.setOnClickListener(new View.OnClickListener() {
@@ -150,6 +190,10 @@ public class ConsultorioMFragment extends Fragment implements ConsultorioInterfa
         latitud = objConsultorio.getLatitud();
         Direccion  = objConsultorio.getDireccion();
 
+        //Picasso.get().load(objConsultorio.getImage()).resize(200, 200).centerCrop().into(imageConsultorio);
+
+
+        Glide.with(this).load(objConsultorio.getImage()).into(imageConsultorio);
         tfnombre.setText(objConsultorio.getNombre());
         tfDireccion.setText(objConsultorio.getDireccion());
         tfReferencia.setText(objConsultorio.getReferencia());
@@ -158,6 +202,7 @@ public class ConsultorioMFragment extends Fragment implements ConsultorioInterfa
         tfEmail.setText(objConsultorio.getEmail());
         tfPrecioConsulta.setText(String.valueOf(objConsultorio.getPrecioConsulta()));
         tfServiciosOfrecidos.setText(objConsultorio.getServiciosOfresidos());
+        tfEspecialidad.setText(objConsultorio.getEspecialidad());
         //Toast.makeText(getContext(), "Exitoso. "+objConsultorio.getNombre(), Toast.LENGTH_SHORT).show();
     }
 
@@ -176,7 +221,10 @@ public class ConsultorioMFragment extends Fragment implements ConsultorioInterfa
         consultorioModelo.setTelefono(tfTelefono.getText().toString());
         consultorioModelo.setCelular(tfCelular.getText().toString());
         consultorioModelo.setEmail(tfEmail.getText().toString());
-        //consultorioModelo.setPrecioConsulta(Double.parseDouble(String.valueOf(tfPrecioConsulta.getText())));
+        consultorioModelo.setEspecialidad(tfEspecialidad.getText().toString());
+        String monto = tfPrecioConsulta.getText().toString();
+
+        consultorioModelo.setPrecioConsulta(Double.parseDouble(monto));
         consultorioModelo.setServiciosOfresidos(tfServiciosOfrecidos.getText().toString());
 
         consultorioPresentador.ejecutarActualizarConsultorio(consultorioModelo);
@@ -189,8 +237,83 @@ public class ConsultorioMFragment extends Fragment implements ConsultorioInterfa
         Toast.makeText(getContext(), "Se ha actualizado exitosamente los datos.", Toast.LENGTH_SHORT).show();
     }
 
+
+    public void subirFoto() {
+        Toast.makeText(getContext(), "A ocurrido un error.", Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     public void manejadorActualizarConsultorioFallido() {
         Toast.makeText(getContext(), "A ocurrido un error.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GALLERY_INTENT && resultCode == RESULT_OK) {
+            if (data != null) {
+
+                final Uri localUri = data.getData();
+                Log.d(TAG, "Uri: " + localUri.toString());
+                storageReference = FirebaseStorage.getInstance().getReference(String.valueOf(new Random().nextInt()));
+                UploadTask uploadTask = storageReference.putFile(localUri);
+                putImageInStorage(storageReference,uploadTask);
+
+
+
+            }
+        }
+
+    }
+
+    private void putImageInStorage(final StorageReference storageReference,final UploadTask uploadTask) {
+
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+                // Continue with the task to get the download URL
+                Log.d(TAG,storageReference.getDownloadUrl().toString());
+                return storageReference.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                    Log.w("IMAGENEXISOTSO", downloadUri.toString());
+
+                    ConsultorioModelo consultorio = new ConsultorioModelo();
+                    consultorio.setImage(downloadUri.toString());
+                    actualizarFotoConsultorio(consultorio);
+
+                    if (task.isSuccessful()) {
+
+                    } else {
+                        Log.w(TAG, "Image upload task was not successful.",
+                                task.getException());
+                    }
+                }
+            }
+        });
+    }
+    @Override
+    public void actualizarFotoConsultorio(ConsultorioModelo objConsultorio) {
+        String idUsuario = SaveSharedPreference.getLoggedToken(getContext());
+        objConsultorio.setIdConsultorio(idUsuario);
+        consultorioPresentador.ejecutarActualizarFotoConsultorio(objConsultorio);
+    }
+
+    @Override
+    public void manejadorActualizarFotoConsultorioExitoso(ConsultorioModelo objConsultorio) {
+        Toast.makeText(getContext(), "Se ha Actualizado la foto.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void manejadorActualizarFotoConsultorioFallido() {
+        Toast.makeText(getContext(), "A Ocurrido un error.", Toast.LENGTH_SHORT).show();
     }
 }

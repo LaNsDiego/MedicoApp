@@ -42,4 +42,19 @@ public class VerConsultorioPresentador implements ConsultorioInterface.Presentad
     public void cuandoActualizarConsultorioFallido() {
         vistaConsultorioVista.manejadorActualizarConsultorioFallido();
     }
+
+    @Override
+    public void ejecutarActualizarFotoConsultorio(ConsultorioModelo objConsultorio) {
+        consultorioModelo.actualizarFotoConsultorio(objConsultorio);
+    }
+
+    @Override
+    public void cuandoActualizarFotoConsultorioExitoso(ConsultorioModelo objConsultorio) {
+        vistaConsultorioVista.manejadorActualizarFotoConsultorioExitoso(objConsultorio);
+    }
+
+    @Override
+    public void cuandoActualizarFotoConsultorioFallido() {
+        vistaConsultorioVista.manejadorActualizarFotoConsultorioFallido();
+    }
 }

@@ -53,4 +53,19 @@ public class VerPerfilPresentador implements PerfilInterface.Presentador {
     public void cuandoActualizarPerfilFallido() {
         vistaPerfil.manejadorActualizarPerfilFallido();
     }
+
+    @Override
+    public void ejecutarActualizarFoto(UsuarioModelo objUsuario) {
+        usuarioModelo.actualizarFoto(objUsuario);
+    }
+
+    @Override
+    public void cuandoActualizarFotoExitoso(UsuarioModelo objUsuario) {
+        vistaPerfil.manejadorActualizarFotoExitoso(objUsuario);
+    }
+
+    @Override
+    public void cuandoActualizarFotoFallido() {
+        vistaPerfil.manejadorActualizarFotoFallido();
+    }
 }

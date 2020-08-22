@@ -11,6 +11,10 @@ public interface ConsultorioInterface {
         void actualizarConsultorio();
         void manejadorActualizarConsultorioExitoso(ConsultorioModelo objConsultorio); //5.1
         void manejadorActualizarConsultorioFallido(); //5.1
+
+        void actualizarFotoConsultorio(ConsultorioModelo objConsultorio);
+        void manejadorActualizarFotoConsultorioExitoso(ConsultorioModelo objConsultorio); //5.1
+        void manejadorActualizarFotoConsultorioFallido(); //5.1
     }
 
     interface Presentador{
@@ -23,11 +27,16 @@ public interface ConsultorioInterface {
         void cuandoActualizarConsultorioExitoso(ConsultorioModelo objConsultorio); // 4.1
         void cuandoActualizarConsultorioFallido(); // // 4.1
 
+        void ejecutarActualizarFotoConsultorio(ConsultorioModelo objConsultorio); /// general el arraylist  2
+        void cuandoActualizarFotoConsultorioExitoso(ConsultorioModelo objConsultorio); // 4.1
+        void cuandoActualizarFotoConsultorioFallido(); // // 4.1
+
 
     }
 
     interface Modelo{
         void ObtenerPorIdConsultorio(String idConsultorio);  /// 3
         void actualizarConsultorio(ConsultorioModelo objConsultorio);  /// 3
+        void actualizarFotoConsultorio(ConsultorioModelo objConsultorio);  /// 3
     }
 }

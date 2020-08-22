@@ -14,6 +14,8 @@ public class ConsultorioModelo implements ConsultorioInterface.Modelo {
 
     private String idConsultorio;
     private String idMedico;
+    private String image;
+    private String especialidad;
     private String nombre;
     private double precioConsulta;
     private Double latitud;
@@ -157,6 +159,22 @@ public class ConsultorioModelo implements ConsultorioInterface.Modelo {
         this.celular = celular;
     }
 
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public void ObtenerPorIdConsultorio(String idConsultorio) {
 
@@ -195,6 +213,7 @@ public class ConsultorioModelo implements ConsultorioInterface.Modelo {
                         "email",objConsultorio.getEmail(),
                         "precioConsulta",objConsultorio.getPrecioConsulta(),
                         "serviciosOfrecidos",objConsultorio.getServiciosOfresidos(),
+                        "especialidad",objConsultorio.getEspecialidad(),
                         "estado","Activo"
                 ).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -206,6 +225,23 @@ public class ConsultorioModelo implements ConsultorioInterface.Modelo {
                 }
 
 
+            }
+        });
+    }
+
+    @Override
+    public void actualizarFotoConsultorio(final ConsultorioModelo objConsultorio) {
+        Conexion.getCollectionConsultorio().document(objConsultorio.getIdConsultorio())
+                .update(
+                        "image",objConsultorio.getImage()
+                ).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    consultorioPresentador.cuandoActualizarFotoConsultorioExitoso(objConsultorio);
+                }else{
+                    consultorioPresentador.cuandoActualizarFotoConsultorioFallido();
+                }
             }
         });
     }

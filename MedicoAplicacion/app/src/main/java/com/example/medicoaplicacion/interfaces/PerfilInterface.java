@@ -11,6 +11,10 @@ public interface PerfilInterface {
         void actualizarPerfil();
         void manejadorActualizarPerfilExitoso(UsuarioModelo objUsuario); //5.1
         void manejadorActualizarPerfilFallido(); //5.1
+
+        void actualizarFoto(UsuarioModelo usuarioModelo);
+        void manejadorActualizarFotoExitoso(UsuarioModelo objUsuario); //5.1
+        void manejadorActualizarFotoFallido(); //5.1
     }
 
     interface Presentador{
@@ -23,11 +27,16 @@ public interface PerfilInterface {
         void cuandoActualizarPerfilExitoso(UsuarioModelo objUsuario); // 4.1
         void cuandoActualizarPerfilFallido(); // // 4.1
 
+        void ejecutarActualizarFoto(UsuarioModelo objUsuario); /// general el arraylist  2
+        void cuandoActualizarFotoExitoso(UsuarioModelo objUsuario); // 4.1
+        void cuandoActualizarFotoFallido(); // // 4.1
+
 
     }
 
     interface Modelo{
         void ObtenerPorIdUsuario(String idUsuario);  /// 3
         void actualizarPerfil(UsuarioModelo objUsuario);  /// 3
+        void actualizarFoto(UsuarioModelo objUsuario);  /// 3
     }
 }

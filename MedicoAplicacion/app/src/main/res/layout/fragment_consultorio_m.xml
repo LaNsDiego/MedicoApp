@@ -15,20 +15,69 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imageConsultorio"
+                        android:src="@drawable/consultorio"
+                        />
+
+
+                    <Button
+                        android:id="@+id/btnSubirFoto"
+                        android:layout_width="27dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="-80dp"
+                        android:layout_marginRight="15dp"
+                        android:gravity="right"
+
+                        android:padding="0dp"
+                        app:backgroundTint="@android:color/transparent"
+                        app:icon="@drawable/ic_camera_enhance_black_24dp" />
+
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center"
+                    android:textColor="#ffffff"
+                    android:textAlignment="center"
+                    android:id="@+id/tvNombreMedico"
+                    android:textSize="15dp"
+                    android:text=""
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
             >
-
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="198dp"
-                android:layout_height="102dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
-                android:src="@drawable/ic_lock_black_24dp" />
-
             <com.google.android.material.textfield.TextInputLayout
 
                 android:layout_width="match_parent"
@@ -52,7 +101,7 @@
                 android:layout_marginTop="8dp"
                 app:boxBackgroundColor="#FFFFFF"
                 app:endIconMode="custom"
-                app:endIconDrawable="@drawable/ic_add_circle_black_24dp"
+                app:endIconDrawable="@drawable/ic_map_black_24dp"
                 android:hint="Dirección">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -157,6 +206,7 @@
                     android:layout_width="match_parent"
                     android:id="@+id/tfPrecioConsulta"
                     android:text=""
+                    android:inputType="number"
                     android:layout_height="wrap_content"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -188,6 +238,11 @@
                 android:layout_height="wrap_content"
                 android:text="GUARDAR"
                 />
+
+        </LinearLayout>
+
+
+
 
         </LinearLayout>
     </ScrollView>
