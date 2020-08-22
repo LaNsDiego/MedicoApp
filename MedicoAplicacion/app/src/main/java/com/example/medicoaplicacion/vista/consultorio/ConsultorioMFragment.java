@@ -19,6 +19,7 @@ import com.example.medicoaplicacion.modelo.EspecialidadModelo;
 import com.example.medicoaplicacion.modelo.SaveSharedPreference;
 import com.example.medicoaplicacion.presentador.consultorio.VerConsultorioPresentador;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,9 @@ public class ConsultorioMFragment extends Fragment implements ConsultorioInterfa
     TextInputEditText tfnombre,tfDireccion,tfReferencia,tfTelefono,tfCelular,tfEmail,tfPrecioConsulta,tfServiciosOfrecidos;
     Button btnActualizarConsultorio;
     AutoCompleteTextView tfEspecialidad;
-
+    public  static  Double latitud;
+    public  static  Double Longitud;
+    public  static  String Direccion;
     ConsultorioInterface.Presentador consultorioPresentador;
     EspecialidadModelo especialidadModelo;
     public ConsultorioMFragment() {
@@ -86,7 +89,12 @@ public class ConsultorioMFragment extends Fragment implements ConsultorioInterfa
         tfServiciosOfrecidos = vista.findViewById(R.id.tfServiciosOfrecidos);
         tfEspecialidad = vista.findViewById(R.id.tfEspecialidad);
         btnActualizarConsultorio = vista.findViewById(R.id.btnActualizarConsultorio);
-
+        tfDireccion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mensaje();
+            }
+        });
         btnActualizarConsultorio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,13 +112,31 @@ public class ConsultorioMFragment extends Fragment implements ConsultorioInterfa
         AutoCompleteTextView editTextFilledExposedDropdownEspecialidad = vista.findViewById(R.id.tfEspecialidad);
         editTextFilledExposedDropdownEspecialidad.setAdapter(adapterEspecialidad);
 
-
+        //ABRIR MAPA
+        TextInputLayout til = vista.findViewById(R.id.tf_layout_address);
+        til.setEndIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirModalMapa();
+            }
+        });
 
 
 
 
         return vista;
     }
+
+    public void abrirModalMapa(){
+        MapaFragment mapaF = new MapaFragment();
+        mapaF.show(getChildFragmentManager(),"GAA");
+    }
+
+
+    public void mensaje(){
+        tfDireccion.setText(Direccion);
+    }
+
 
     @Override
     public void menejadorVerConsultorio() {
@@ -120,6 +146,9 @@ public class ConsultorioMFragment extends Fragment implements ConsultorioInterfa
 
     @Override
     public void manejadorVerConsultorioExitoso(ConsultorioModelo objConsultorio) {
+        Longitud = objConsultorio.getLongitud();
+        latitud = objConsultorio.getLatitud();
+        Direccion  = objConsultorio.getDireccion();
 
         tfnombre.setText(objConsultorio.getNombre());
         tfDireccion.setText(objConsultorio.getDireccion());
@@ -139,6 +168,9 @@ public class ConsultorioMFragment extends Fragment implements ConsultorioInterfa
         ConsultorioModelo consultorioModelo = new ConsultorioModelo();
         consultorioModelo.setIdConsultorio(id_consultorio);
         consultorioModelo.setNombre(tfnombre.getText().toString());
+        consultorioModelo.setLatitud(latitud);
+        consultorioModelo.setLongitud(Longitud);
+        consultorioModelo.setDireccion(tfDireccion.getText().toString());
         consultorioModelo.setDireccion(tfDireccion.getText().toString());
         consultorioModelo.setReferencia(tfReferencia.getText().toString());
         consultorioModelo.setTelefono(tfTelefono.getText().toString());

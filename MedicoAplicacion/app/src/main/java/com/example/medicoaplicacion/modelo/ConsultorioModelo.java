@@ -16,6 +16,8 @@ public class ConsultorioModelo implements ConsultorioInterface.Modelo {
     private String idMedico;
     private String nombre;
     private double precioConsulta;
+    private Double latitud;
+    private Double longitud;
     private String direccion;
     private String referencia;
     private String email;
@@ -34,6 +36,22 @@ public class ConsultorioModelo implements ConsultorioInterface.Modelo {
     }
 
     public ConsultorioModelo(){};
+
+    public Double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(Double latitud) {
+        this.latitud = latitud;
+    }
+
+    public Double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(Double longitud) {
+        this.longitud = longitud;
+    }
 
     public String getIdConsultorio() {
         return idConsultorio;
@@ -160,24 +178,6 @@ public class ConsultorioModelo implements ConsultorioInterface.Modelo {
             }
 
         );
-        /*
-        ConsultorioModelo obj = new ConsultorioModelo();
-        obj.setIdConsultorio("1");
-        obj.setIdMedico("1");
-        obj.setNombre("Consultorio Isabel");
-        obj.setPrecioConsulta(10.00);
-        obj.setDireccion("Tacna, av. bilingur");
-        obj.setFoto("foto");
-        obj.setEstado("Activo");
-        obj.setReferencia("Tacna");
-        obj.setTelefono("9384848");
-        obj.setEmail("consultas@gmail.com");
-        obj.setCelular("8473474834");
-        obj.setFecha("2020-10-20");
-
-        consultorioPresentador.cuandoVerConsultorioExitoso(obj);
-        */
-
     }
 
     @Override
@@ -187,6 +187,8 @@ public class ConsultorioModelo implements ConsultorioInterface.Modelo {
                 .update(
                         "nombre",objConsultorio.getNombre(),
                         "direccion",objConsultorio.getDireccion(),
+                        "latitud",objConsultorio.getLatitud(),
+                        "longitud",objConsultorio.getLongitud(),
                         "referencia",objConsultorio.getReferencia(),
                         "telefono",objConsultorio.getTelefono(),
                         "celular",objConsultorio.getCelular(),
