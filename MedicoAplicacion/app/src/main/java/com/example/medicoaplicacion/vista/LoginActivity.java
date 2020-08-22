@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.medicoaplicacion.MainActivity;
@@ -27,7 +28,8 @@ public class LoginActivity extends AppCompatActivity implements UsuarioInterface
     TextInputEditText txtUsuario;
     TextInputEditText txtClave;
     RadioButton rdnRecordarSesion;
-    MaterialButton btnLogin , btnRegistrarse;
+    MaterialButton btnLogin;
+    TextView btnRegistrarse;
     UsuarioInterface.Presentador presentadorUsuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
