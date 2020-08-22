@@ -11,8 +11,6 @@ public interface PerfilInterface {
         void actualizarPerfil();
         void manejadorActualizarPerfilExitoso(UsuarioModelo objUsuario); //5.1
         void manejadorActualizarPerfilFallido(); //5.1
-
-        void SubirPerfil();
     }
 
     interface Presentador{

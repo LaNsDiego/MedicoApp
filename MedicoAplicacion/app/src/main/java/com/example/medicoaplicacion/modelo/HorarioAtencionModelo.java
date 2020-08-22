@@ -110,11 +110,7 @@ public class HorarioAtencionModelo implements HorarioAtencionListarInterface.Mod
 
                          final List<HorarioAtencionModelo> listaHorario = new ArrayList<>();
                          for (DocumentSnapshot document : task.getResult().getDocuments()){
-
-
-
                              HorarioAtencionModelo horario = document.toObject(HorarioAtencionModelo.class);
-
                              //Log.d("LISTA",horario.getDia());
                              listaHorario.add(horario);
 

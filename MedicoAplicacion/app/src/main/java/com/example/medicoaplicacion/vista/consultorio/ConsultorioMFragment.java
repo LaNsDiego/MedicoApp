@@ -2,7 +2,6 @@ package com.example.medicoaplicacion.vista.consultorio;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -19,9 +18,7 @@ import com.example.medicoaplicacion.modelo.ConsultorioModelo;
 import com.example.medicoaplicacion.modelo.EspecialidadModelo;
 import com.example.medicoaplicacion.modelo.SaveSharedPreference;
 import com.example.medicoaplicacion.presentador.consultorio.VerConsultorioPresentador;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,21 +105,11 @@ public class ConsultorioMFragment extends Fragment implements ConsultorioInterfa
         editTextFilledExposedDropdownEspecialidad.setAdapter(adapterEspecialidad);
 
 
-        //ABRIR MAPA
-        TextInputLayout til = vista.findViewById(R.id.tf_layout_address);
-        til.setEndIconOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                abrirModalMapa();
-            }
-        });
+
+
+
 
         return vista;
-    }
-
-    void abrirModalMapa(){
-        MapaFragment mapaF = new MapaFragment();
-        mapaF.show(getChildFragmentManager(),"GAA");
     }
 
     @Override
